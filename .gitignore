@@ -1,4 +1,4 @@
 backend/01-login/.env
-backend/01-login/node_modules/
-backend/01-login/routes/
-backend/01-login/views/
+backend/01-login/node_modules/*
+backend/01-login/routes/*
+backend/01-login/views/*
