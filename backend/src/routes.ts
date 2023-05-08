@@ -55,9 +55,13 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 				//Hidden (direct link only) characters do not need to be excluded from this search method
 
 				const foundChar = await req.em.findOne(Char, { id });
-				const not: string = foundChar ? "" : "not ";
-				console.log("Character search complete. Character " + not + "found.");
-				return reply.send(foundChar);
+				if (foundChar) {
+					console.log("Character search complete. Character found.");
+					return reply.send(foundChar);
+				} else {
+					console.log("Character search complete. Character not found.");
+					return reply.send({});
+				}
 			} catch (err) {
 				console.log("Failed to complete character search.", err.message);
 				return reply.status(500).send({ message: err.message });
