@@ -19,10 +19,10 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		return "Welcome to Pears' Character Profiles";
 	});
 
-	// SEARCH ROUTE
-	// this is the route for searching for characters
+	// SEARCH ROUTES
+	// this is the route for searching for characters by NAME
 	// right now I'm going to search for emails to test it
-	app.get<{ Params: { fName: string; lName: string } }>(
+	app.search<{ Params: { fName: string; lName: string } }>(
 		"/search/:fName-:lName",
 		async (req: FastifyRequest, reply: FastifyReply) => {
 			let { fName, lName } = req.params;
@@ -35,15 +35,26 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		}
 	);
 
+	app.search<{ Params: { id: number } }>(
+		"/search/:id",
+		async (req: FastifyRequest, reply: FastifyReply) => {
+			const { id } = req.params;
+
+			//when sea
+
+			return req.em.findOne(Char, { id });
+		}
+	);
+
 	// USER PROFILE
 
 	// USER CHARACTERS
 
 	// C = Create Character
-	app.post<{ Body: { id: number; fName: string; lName: string } }>(
+	app.post<{ Body: { id: number; fName: string; lName: string; hidden: boolean } }>(
 		"/character",
 		async (req, reply) => {
-			const { id, fName, lName } = req.body;
+			const { id, fName, lName, hidden } = req.body;
 
 			try {
 				const newChar = await req.em.create(Char, {
