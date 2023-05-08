@@ -68,16 +68,14 @@ test("Search for character that exists by ID", async () => {
 	rj.lName.should.equal("mora");
 });
 
-// test("Search for character that does not exist by ID", async () => {
-// 	const response = await app.inject({
-// 		method: "SEARCH",
-// 		url: "/search/42069",
-// 	});
-//
-// 	response.statusCode.should.equal(200);
-// 	const rj = response.json();
-// 	rj.length.should.equal(0);
-// });
+test("Search for character that does not exist by ID", async () => {
+	const response = await app.inject({
+		method: "SEARCH",
+		url: "/search/42069",
+	});
+
+	response.statusCode.should.equal(404);
+});
 
 // test("Search for character that exists but is hidden, by ID", async () => {
 // 	const response = await app.inject({

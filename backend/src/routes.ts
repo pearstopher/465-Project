@@ -60,7 +60,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 					return reply.send(foundChar);
 				} else {
 					console.log("Character search complete. Character not found.");
-					return reply.send({});
+					return reply.status(404).send({ message: "Character not found." });
 				}
 			} catch (err) {
 				console.log("Failed to complete character search.", err.message);
