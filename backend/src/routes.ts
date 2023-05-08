@@ -9,17 +9,26 @@ import { ICreateUsersBody } from "./types.js";
  * @param {{}} _options - Fastify instance options (Optional)
  * @returns {Promise<void>} - Returns all of the initialized routes
  */
-async function DoggrRoutes(app: FastifyInstance, _options = {}) {
+async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	if (!app) {
 		throw new Error("Fastify instance has no value during routes construction");
 	}
 
-	app.get("/hello", async (request: FastifyRequest, reply: FastifyReply) => {
-		return "hello";
+	// HOME ROUTE
+	// This is the landing page you get when you visit the site.
+	app.get("/", async (request: FastifyRequest, reply: FastifyReply) => {
+		return "Welcome to Pears' Character Profiles";
 	});
 
-	app.get("/dbTest", async (request: FastifyRequest, reply: FastifyReply) => {
-		return request.em.find(User, {});
+	// SEARCH ROUTE
+	// this is the route for searching for characters
+	// right now I'm going to search for emails to test it
+	app.get("/search/:searchEmail", async (req: FastifyRequest, reply: FastifyReply) => {
+		const { searchEmail } = req.params;
+
+		return "Your email is " + searchEmail + ".";
+
+		//return req.em.find(User, { email: searchEmail });
 	});
 
 	// Core method for adding generic SEARCH http method
@@ -134,4 +143,4 @@ async function DoggrRoutes(app: FastifyInstance, _options = {}) {
 	});
 }
 
-export default DoggrRoutes;
+export default PCPRoutes;
