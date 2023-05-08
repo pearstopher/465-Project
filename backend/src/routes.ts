@@ -19,32 +19,36 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		return "Welcome to Pears' Character Profiles";
 	});
 
-	// SEARCH ROUTES
-	// this is the route for searching for characters by NAME
-	// right now I'm going to search for emails to test it
-	app.search<{ Params: { fName: string; lName: string } }>(
-		"/search/:fName-:lName",
-		async (req: FastifyRequest, reply: FastifyReply) => {
-			let { fName, lName } = req.params;
+	// C = Create Character
+	app.post<{ Body: { id: number; fName: string; lName: string; desc: string; hidden: boolean } }>(
+		"/character",
+		async (req, reply) => {
+			const { id, fName, lName, desc, hidden } = req.body;
+
+			const fLower = fName.toLowerCase();
+			const lLower: string = lName.toLowerCase();
 
 			try {
-				// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
-				fName = fName.toLowerCase();
-				lName = lName.toLowerCase();
+				const newChar = await req.em.create(Char, {
+					id,
+					fName: fLower,
+					lName: lLower,
+					desc,
+					hidden,
+				});
 
-				//1. Note that character names are not unique, this could return multiple characters
-				//2. Notice that private characters are hidden from the search results
-				const foundChars = await req.em.find(Char, { fName, lName, hidden: false });
+				await req.em.flush();
 
-				console.log("Character search complete. " + foundChars.length + " character(s) found.");
-				return reply.send(foundChars);
+				console.log("Created new character:", newChar);
+				return reply.send(newChar);
 			} catch (err) {
-				console.log("Failed to complete character search.", err.message);
+				console.log("Failed to create new user", err.message);
 				return reply.status(500).send({ message: err.message });
 			}
 		}
 	);
 
+	// R = Read
 	app.get<{ Params: { id: number } }>(
 		"/character/:id",
 		async (req: FastifyRequest, reply: FastifyReply) => {
@@ -69,48 +73,29 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		}
 	);
 
-	// USER PROFILE
-
-	// USER CHARACTERS
-
-	// C = Create Character
-	app.post<{ Body: { id: number; fName: string; lName: string; hidden: boolean } }>(
-		"/character",
-		async (req, reply) => {
-			const { id, fName, lName, hidden } = req.body;
+	// S = Search
+	app.search<{ Params: { fName: string; lName: string } }>(
+		"/search/:fName-:lName",
+		async (req: FastifyRequest, reply: FastifyReply) => {
+			let { fName, lName } = req.params;
 
 			try {
-				const newChar = await req.em.create(Char, {
-					id,
-					fName,
-					lName,
-				});
+				// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
+				fName = fName.toLowerCase();
+				lName = lName.toLowerCase();
 
-				await req.em.flush();
+				//1. Note that character names are not unique, this could return multiple characters
+				//2. Notice that private characters are hidden from the search results
+				const foundChars = await req.em.find(Char, { fName, lName, hidden: false });
 
-				console.log("Created new character:", newChar);
-				return reply.send(newChar);
+				console.log("Character search complete. " + foundChars.length + " character(s) found.");
+				return reply.send(foundChars);
 			} catch (err) {
-				console.log("Failed to create new user", err.message);
+				console.log("Failed to complete character search.", err.message);
 				return reply.status(500).send({ message: err.message });
 			}
 		}
 	);
-
-	//READ
-	// (find a character by their name)
-	app.search<{ Body: { fName: string; lName: string } }>("/character", async (req, reply) => {
-		const { fName, lName } = req.body;
-
-		try {
-			const theChar = await req.em.findOne(Char, { fName, lName });
-			console.log(theChar);
-			reply.send(theChar);
-		} catch (err) {
-			console.error(err);
-			reply.status(500).send(err);
-		}
-	});
 
 	// UPDATE
 	// your name or ID will be verified and won't change so you cant update those
