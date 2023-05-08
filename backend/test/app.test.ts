@@ -149,6 +149,56 @@ test("Search for character that exists but is hidden, by ID", async () => {
 
 // U = Update
 
+test("Update a valid user with valid information", async () => {
+	const extraDesc = " add this to the description";
+
+	const payload = {
+		id: fakeUser1.id,
+		desc: fakeUser1.desc + extraDesc,
+		hidden: !fakeUser1.hidden,
+	};
+	const response = await app.inject({
+		method: "PUT",
+		url: "/character",
+		payload,
+	});
+
+	response.statusCode.should.equal(200);
+	const rj = response.json();
+	rj.desc.should.equal(fakeUser1.desc + extraDesc);
+	rj.hidden.should.not.equal(fakeUser1.hidden);
+});
+
+test("Update a valid user with invalid information", async () => {
+	const payload = {
+		id: fakeUser1.id,
+		desc: fakeUser1.desc,
+		hidden: null, // this is honestly the only way to break it I can think of
+	};
+	const response = await app.inject({
+		method: "PUT",
+		url: "/character",
+		payload,
+	});
+
+	response.statusCode.should.equal(500);
+});
+
+test("Update an invalid user", async () => {
+	const payload = {
+		id: fakeUser2.id,
+		desc: fakeUser2.desc,
+		hidden: fakeUser2.hidden,
+	};
+	const response = await app.inject({
+		method: "POST",
+		url: "/character",
+		payload,
+	});
+
+	response.statusCode.should.equal(500);
+});
+
 // D = Delete
 
 test("Delete a character which has beeen successfully added to the database", async () => {
