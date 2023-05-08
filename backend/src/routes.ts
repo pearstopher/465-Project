@@ -31,7 +31,11 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 			fName = fName.toLowerCase();
 			lName = lName.toLowerCase();
 
-			return req.em.find(Char, { fName, lName });
+			//1. Note that character names are not unique, this could return multiple characters
+			//2. Notice that private characters are hidden from the search results
+			const foundChars = req.em.find(Char, { fName, lName, hidden: false });
+
+			return foundChars;
 		}
 	);
 
@@ -40,7 +44,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		async (req: FastifyRequest, reply: FastifyReply) => {
 			const { id } = req.params;
 
-			//when sea
+			//Character ID is not publicly available
+			//Hidden (direct link only) characters do not need to be excluded from this search method
 
 			return req.em.findOne(Char, { id });
 		}
