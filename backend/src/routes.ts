@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Match } from "./db/entities/Match.js";
-import { User } from "./db/entities/User.js";
+import { Char } from "./db/entities/Char.js";
 import { ICreateUsersBody } from "./types.js";
 
 /** This function creates all backend routes for the site
@@ -28,7 +28,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 
 		return "Your email is " + searchEmail + ".";
 
-		//return req.em.find(User, { email: searchEmail });
+		//return req.em.find(Char, { email: searchEmail });
 	});
 
 	// USER PROFILE
@@ -98,7 +98,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		const { id } = req.body;
 
 		try {
-			const theChar = await req.em.findOne(User, { id });
+			const theChar = await req.em.findOne(Char, { id });
 
 			await req.em.remove(theChar).flush();
 			console.log(theChar);
