@@ -25,10 +25,11 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	app.get("/search/:fName-:lName", async (req: FastifyRequest, reply: FastifyReply) => {
 		let { fName, lName } = req.params;
 
-		fName = fName.charAt(0).toUpperCase();
-		return fName;
+		// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
+		fName = fName.toLowerCase();
+		lName = lName.toLowerCase();
 
-		return req.em.find(Char, { fName: "Winter", lName: "Snow" });
+		return req.em.find(Char, { fName, lName });
 	});
 
 	// USER PROFILE
