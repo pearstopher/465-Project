@@ -56,8 +56,8 @@ test("Search for character that is hidden by name", async () => {
 
 test("Search for character that exists by ID", async () => {
 	const response = await app.inject({
-		method: "SEARCH",
-		url: "/search/42934531",
+		method: "GET",
+		url: "/character/42934531",
 	});
 
 	response.statusCode.should.equal(200);
@@ -69,8 +69,8 @@ test("Search for character that exists by ID", async () => {
 
 test("Search for character that does not exist by ID", async () => {
 	const response = await app.inject({
-		method: "SEARCH",
-		url: "/search/42069",
+		method: "GET",
+		url: "/character/42069",
 	});
 
 	response.statusCode.should.equal(404);
@@ -78,8 +78,8 @@ test("Search for character that does not exist by ID", async () => {
 
 test("Search for character that exists but is hidden, by ID", async () => {
 	const response = await app.inject({
-		method: "SEARCH",
-		url: "/search/45502893",
+		method: "GET",
+		url: "/character/45502893",
 	});
 
 	response.statusCode.should.not.equal(404);

@@ -45,8 +45,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		}
 	);
 
-	app.search<{ Params: { id: number } }>(
-		"/search/:id",
+	app.get<{ Params: { id: number } }>(
+		"/character/:id",
 		async (req: FastifyRequest, reply: FastifyReply) => {
 			const { id } = req.params;
 
