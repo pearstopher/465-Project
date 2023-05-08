@@ -1,6 +1,5 @@
 import { Entity, Property, Unique, OneToMany, Collection, Cascade } from "@mikro-orm/core";
 import { BaseEntity } from "./BaseEntity.js";
-import { Match } from "./Match.js";
 
 @Entity({ tableName: "characters" })
 export class Char extends BaseEntity {
