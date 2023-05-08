@@ -22,15 +22,18 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	// SEARCH ROUTE
 	// this is the route for searching for characters
 	// right now I'm going to search for emails to test it
-	app.get("/search/:fName-:lName", async (req: FastifyRequest, reply: FastifyReply) => {
-		let { fName, lName } = req.params;
+	app.get<{ Params: { fName: string; lName: string } }>(
+		"/search/:fName-:lName",
+		async (req: FastifyRequest, reply: FastifyReply) => {
+			let { fName, lName } = req.params;
 
-		// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
-		fName = fName.toLowerCase();
-		lName = lName.toLowerCase();
+			// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
+			fName = fName.toLowerCase();
+			lName = lName.toLowerCase();
 
-		return req.em.find(Char, { fName, lName });
-	});
+			return req.em.find(Char, { fName, lName });
+		}
+	);
 
 	// USER PROFILE
 
