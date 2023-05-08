@@ -4,16 +4,41 @@ import { test, teardown } from "tap";
 import { faker } from "@faker-js/faker";
 import app from "../src/app.js";
 
+//Test Character CR(S)UD
+
+//S = Search
+
 test("Search for a character that exists by name", async () => {
 	const response = await app.inject({
 		method: "SEARCH",
-		url: "/search/winter-snow",
+		url: "/search/ane-mora",
 	});
 
 	response.statusCode.should.equal(200);
 	const rj = response.json();
 	rj.length.should.equal(1);
-	//response.body.should.equal("hello");
+});
+
+test("Search for a character that does not exist by name", async () => {
+	const response = await app.inject({
+		method: "SEARCH",
+		url: "/search/doesnt-exist",
+	});
+
+	response.statusCode.should.equal(200);
+	const rj = response.json();
+	rj.length.should.equal(0);
+});
+
+test("Multiple character results", async () => {
+	const response = await app.inject({
+		method: "SEARCH",
+		url: "/search/september-snow",
+	});
+
+	response.statusCode.should.equal(200);
+	const rj = response.json();
+	rj.length.should.equal(2);
 });
 
 // test("List all users from /dbTest", async () => {

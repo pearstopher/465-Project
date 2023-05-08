@@ -17,14 +17,22 @@ export class CharSeeder extends Seeder {
 			fName: "september",
 			lName: "snow",
 			desc: "This is an (optional) character description.",
-			hidden: true,
+			hidden: false,
+		});
+
+		em.create(Char, {
+			id: 22573667,
+			fName: "september",
+			lName: "snow",
+			desc: "This is not my character, it's just somebody with the same name as one of my characters.",
+			hidden: false,
 		});
 
 		em.create(Char, {
 			id: 45502893,
 			fName: "winter",
 			lName: "snow",
-			hidden: false,
+			hidden: true,
 		});
 	}
 }
