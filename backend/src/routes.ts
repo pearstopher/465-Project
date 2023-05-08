@@ -27,15 +27,21 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		async (req: FastifyRequest, reply: FastifyReply) => {
 			let { fName, lName } = req.params;
 
-			// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
-			fName = fName.toLowerCase();
-			lName = lName.toLowerCase();
+			try {
+				// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
+				fName = fName.toLowerCase();
+				lName = lName.toLowerCase();
 
-			//1. Note that character names are not unique, this could return multiple characters
-			//2. Notice that private characters are hidden from the search results
-			const foundChars = req.em.find(Char, { fName, lName, hidden: false });
+				//1. Note that character names are not unique, this could return multiple characters
+				//2. Notice that private characters are hidden from the search results
+				const foundChars = await req.em.find(Char, { fName, lName, hidden: false });
 
-			return foundChars;
+				console.log("Character search complete. " + foundChars.length + " character(s) found.");
+				return reply.send(foundChars);
+			} catch (err) {
+				console.log("Failed to complete character search.", err.message);
+				return reply.status(500).send({ message: err.message });
+			}
 		}
 	);
 
