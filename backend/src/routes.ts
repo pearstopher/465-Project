@@ -50,10 +50,18 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		async (req: FastifyRequest, reply: FastifyReply) => {
 			const { id } = req.params;
 
-			//Character ID is not publicly available
-			//Hidden (direct link only) characters do not need to be excluded from this search method
+			try {
+				//Character ID is not publicly available
+				//Hidden (direct link only) characters do not need to be excluded from this search method
 
-			return req.em.findOne(Char, { id });
+				const foundChar = await req.em.findOne(Char, { id });
+				const not: string = foundChar ? "" : "not ";
+				console.log("Character search complete. Character " + not + "found.");
+				return reply.send(foundChar);
+			} catch (err) {
+				console.log("Failed to complete character search.", err.message);
+				return reply.status(500).send({ message: err.message });
+			}
 		}
 	);
 
