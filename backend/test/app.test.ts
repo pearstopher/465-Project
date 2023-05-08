@@ -62,7 +62,6 @@ test("Search for character that exists by ID", async () => {
 
 	response.statusCode.should.equal(200);
 	const rj = response.json();
-	console.log(rj);
 	rj.id.should.equal(42934531);
 	rj.fName.should.equal("ane");
 	rj.lName.should.equal("mora");
@@ -77,25 +76,19 @@ test("Search for character that does not exist by ID", async () => {
 	response.statusCode.should.equal(404);
 });
 
-// test("Search for character that exists but is hidden, by ID", async () => {
-// 	const response = await app.inject({
-// 		method: "SEARCH",
-// 		url: "/search/45502893",
-// 	});
-//
-// 	response.statusCode.should.equal(200);
-// 	response.payload.should.not.be(null);
-// 	//you should be able to retrieve hidden characters by ID, just not by name
-// });
+test("Search for character that exists but is hidden, by ID", async () => {
+	const response = await app.inject({
+		method: "SEARCH",
+		url: "/search/45502893",
+	});
 
-// test("List all users from /dbTest", async () => {
-// 	const response = await app.inject({
-// 		method: "GET",
-// 		url: "/dbTest",
-// 	});
-//
-// 	response.statusCode.should.equal(200);
-// });
+	response.statusCode.should.not.equal(404);
+	//you should be able to retrieve hidden characters by ID, just not by name
+	response.statusCode.should.equal(200);
+	const rj = response.json();
+	rj.fName.should.equal("winter");
+	rj.lName.should.equal("snow");
+});
 
 // test("Creating a new user", async () => {
 // 	const payload = {
