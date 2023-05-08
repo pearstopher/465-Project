@@ -22,12 +22,13 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	// SEARCH ROUTE
 	// this is the route for searching for characters
 	// right now I'm going to search for emails to test it
-	app.get("/search/:searchEmail", async (req: FastifyRequest, reply: FastifyReply) => {
-		const { searchEmail } = req.params;
+	app.get("/search/:fName-:lName", async (req: FastifyRequest, reply: FastifyReply) => {
+		let { fName, lName } = req.params;
 
-		return "Your email is " + searchEmail + ".";
+		fName = fName.charAt(0).toUpperCase();
+		return fName;
 
-		//return req.em.find(Char, { email: searchEmail });
+		return req.em.find(Char, { fName: "Winter", lName: "Snow" });
 	});
 
 	// USER PROFILE

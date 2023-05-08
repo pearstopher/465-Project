@@ -6,24 +6,24 @@ export class CharSeeder extends Seeder {
 	async run(em: EntityManager): Promise<void> {
 		em.create(Char, {
 			id: 42934531,
-			fName: "Ane",
-			lName: "Mora",
+			fName: "ane",
+			lName: "mora",
 			desc: "This is an (optional) character description.",
 			hidden: false,
 		});
 
 		em.create(Char, {
 			id: 45151669,
-			fName: "September",
-			lName: "Snow",
+			fName: "september",
+			lName: "snow",
 			desc: "This is an (optional) character description.",
 			hidden: true,
 		});
 
 		em.create(Char, {
 			id: 45502893,
-			fName: "Winter",
-			lName: "Snow",
+			fName: "winter",
+			lName: "snow",
 			hidden: false,
 		});
 	}
