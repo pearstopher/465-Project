@@ -97,7 +97,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		}
 	);
 
-	// UPDATE
+	// U = Update
 	// your name or ID will be verified and won't change so you cant update those
 	// (you can delete your character and make a new one if you NEED to do this)
 	app.put<{ Body: { id: number; desc: string; hidden: boolean } }>(
@@ -105,7 +105,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		async (req, reply) => {
 			const { id, desc, hidden } = req.body;
 
-			const charToChange = await req.em.findOne(Char, { id });
+			//noticed I can select specific fields here, just the ones I'm interested in. Cool!
+			const charToChange = await req.em.findOne(Char, { id }, { fields: ["id", "desc", "hidden"] });
 			charToChange.desc = desc;
 			charToChange.hidden = hidden;
 
