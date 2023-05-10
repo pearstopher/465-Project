@@ -52,7 +52,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	app.get<{ Params: { id: number } }>(
 		"/character/:id",
 		async (req: FastifyRequest, reply: FastifyReply) => {
-			const { id } = req.params;
+			// @ts-ignore
+			const { id } = req.params; // didn't want to just ignore this but it breaks the docs otherwise
 
 			try {
 				//Character ID is not publicly available
@@ -77,7 +78,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	app.search<{ Params: { fName: string; lName: string } }>(
 		"/search/:fName-:lName",
 		async (req: FastifyRequest, reply: FastifyReply) => {
-			let { fName, lName } = req.params;
+			// @ts-ignore
+			let { fName, lName } = req.params; // didn't want to ignore these but it breaks generating the docs
 
 			try {
 				// in my browser URLs are always lowercase. need to test and see if this actually breaks/is necessary
