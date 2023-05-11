@@ -15,6 +15,13 @@
 
 /* HEADER */
 
+/* logo CSS */
+.logo img {
+    max-width: 88px;
+    border-radius: 50px;
+    border: 6px solid green;
+}
+
 h1 {
     text-align: center;
 }

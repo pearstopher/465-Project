@@ -7,6 +7,7 @@ import viteLogo from "/vite.svg";
 import "@css/header.css";
 import "@css/content.css";
 import "@css/footer.css";
+import logo from "@images/logo.png";
 
 // This is our first React "Component"
 export function App() {
@@ -16,7 +17,7 @@ export function App() {
 				<header>
 					<div className="top">
 						<div className="logo">
-							<img src="/assets/images/logo.jpg" alt="Pears' Character Profiles Logo" />
+							<img src={logo} alt="Pears' Character Profiles Logo" />
 						</div>
 						<h1>Pears' Character Profiles</h1>
 						<h2>H2</h2>
