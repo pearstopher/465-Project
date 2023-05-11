@@ -42,6 +42,8 @@ export const NameSearch = () => {
 	return (
 		<section>
 			<h3>Search results for {fullName}:</h3>
+
+			<CharSearch />
 		</section>
 	);
 };
@@ -133,7 +135,7 @@ export const CharSearch = () => {
 
 	return (
 		<div>
-			<h2>Users:</h2>
+			<h4>Characters:</h4>
 			{chars ? (
 				<ul>
 					{chars.map((char: { id: number; desc: string }) => (
