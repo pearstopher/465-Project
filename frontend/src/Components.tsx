@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getRandomProfile } from "@/InitialState.ts";
 
 export const Match = () => {
-	return(
-		<div>"MATCH PAGE"</div>
-	);
+	return <div>"MATCH PAGE"</div>;
 };
 
 export const Home = () => {
@@ -12,19 +11,30 @@ export const Home = () => {
 		<div>
 			<Title />
 			<Subtitle />
+		</div>
+	);
+};
 
+export const RandomProfile = () => {
+	return (
+		<div>
+			<Image />
 		</div>
 	);
 };
 
 export function Title() {
-	return(<h1>Doggr</h1>);
+	return <h1>Doggr</h1>;
 }
 
 export function Subtitle() {
-	return(<h3>Where your pets find love(tm)</h3>);
+	return <h3>Where your pets find love(tm)</h3>;
 }
 
+export function Image() {
+	const profile = getRandomProfile();
+	return <img src={profile.imgUri} alt={"alt"} />;
+}
 
 // 1) Make a place to store the users list result
 // 2) Make the actual request to backend and store result
@@ -56,11 +66,10 @@ export const Button = () => {
 export const UsersList = () => {
 	const [users, setUsers] = useState([]);
 
-	useEffect( () => {
-		const getUsers = async() => {
+	useEffect(() => {
+		const getUsers = async () => {
 			const usersRes = await axios.get("http://localhost:8080/users");
 			return usersRes.data;
-
 		};
 
 		getUsers().then(setUsers);
@@ -69,18 +78,16 @@ export const UsersList = () => {
 	return (
 		<div>
 			<h2>Users:</h2>
-			{
-				users ?
-					<ul>
-						{
-							users.map( (user: {email: string, name: string}) =>
-							<li key={user.email}> {user.name} - {user.email} </li>)
-						}
-					</ul>
-					:
-					null
-			}
-
+			{users ? (
+				<ul>
+					{users.map((user: { email: string; name: string }) => (
+						<li key={user.email}>
+							{" "}
+							{user.name} - {user.email}{" "}
+						</li>
+					))}
+				</ul>
+			) : null}
 		</div>
 	);
 };
