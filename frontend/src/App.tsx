@@ -1,6 +1,15 @@
-import { Button, Header, Home, UsersList, Match, Messages, RandomProfile } from "@/Components.tsx";
+import {
+	Button,
+	Header,
+	Home,
+	UsersList,
+	Match,
+	Messages,
+	RandomProfile,
+	NameSearch,
+} from "@/Components.tsx";
 import { useState } from "react";
-import { Link, Route, Routes, Router, BrowserRouter } from "react-router-dom";
+import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
 import reactLogo from "@images/react.svg";
 import viteLogo from "/vite.svg";
 //import "@css/App.css";
@@ -34,6 +43,9 @@ export function App() {
 							<li>
 								<Link to="/randomProfile">Random Profile</Link>
 							</li>
+							<li>
+								<Link to="/search/winter-snow">Character Search</Link>
+							</li>
 						</menu>
 					</nav>
 				</header>
@@ -42,6 +54,7 @@ export function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/match" element={<Match />} />
 						<Route path="/randomProfile" element={<RandomProfile />} />
+						<Route path="/search/:firstname/:lastname" element={<NameSearch />} />
 					</Routes>
 				</main>
 				<footer>Copyright 2023 Pears' Character Profiles</footer>

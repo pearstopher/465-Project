@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
+import { useParams } from "react-router-dom";
 
 export const Match = () => {
 	return <div>"MATCH PAGE"</div>;
@@ -20,6 +21,15 @@ export const RandomProfile = () => {
 		<div>
 			<Image />
 		</div>
+	);
+};
+
+export const NameSearch = () => {
+	const { firstname, lastname } = useParams();
+	return (
+		<section>
+			Search results for {firstname} {lastname}
+		</section>
 	);
 };
 
