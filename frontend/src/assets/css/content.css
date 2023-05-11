@@ -1,0 +1,10 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* flex: 1 makes the section take up the available space */
+section {
+    flex: 1;
+}

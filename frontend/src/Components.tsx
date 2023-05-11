@@ -8,10 +8,10 @@ export const Match = () => {
 
 export const Home = () => {
 	return (
-		<div>
+		<section>
 			<Title />
 			<Subtitle />
-		</div>
+		</section>
 	);
 };
 
@@ -24,11 +24,11 @@ export const RandomProfile = () => {
 };
 
 export function Title() {
-	return <h1>Doggr</h1>;
+	return <h3>section title</h3>;
 }
 
 export function Subtitle() {
-	return <h3>Where your pets find love(tm)</h3>;
+	return <h4>section subtitle</h4>;
 }
 
 export function Image() {

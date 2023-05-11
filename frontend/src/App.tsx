@@ -5,6 +5,8 @@ import reactLogo from "@images/react.svg";
 import viteLogo from "/vite.svg";
 //import "@css/App.css";
 import "@css/header.css";
+import "@css/content.css";
+import "@css/footer.css";
 
 // This is our first React "Component"
 export function App() {
@@ -26,7 +28,7 @@ export function App() {
 								<Link to="/">Home</Link>
 							</li>
 							<li>
-								<Link to="/match">My Profile</Link>
+								<Link to="/profile">My Profile</Link>
 							</li>
 							<li>
 								<Link to="/randomProfile">Random Profile</Link>
@@ -34,12 +36,14 @@ export function App() {
 						</menu>
 					</nav>
 				</header>
-
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/match" element={<Match />} />
-					<Route path="/randomProfile" element={<RandomProfile />} />
-				</Routes>
+				<main>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/match" element={<Match />} />
+						<Route path="/randomProfile" element={<RandomProfile />} />
+					</Routes>
+				</main>
+				<footer>Copyright 2023 Pears' Character Profiles</footer>
 			</div>
 		</BrowserRouter>
 	);
