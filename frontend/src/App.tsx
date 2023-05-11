@@ -7,6 +7,7 @@ import {
 	Messages,
 	RandomProfile,
 	NameSearch,
+	CharSearch,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
