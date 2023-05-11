@@ -25,10 +25,23 @@ export const RandomProfile = () => {
 };
 
 export const NameSearch = () => {
-	const { firstname, lastname } = useParams();
+	// extract the name from the url
+	const { fullNameWithDash } = useParams();
+	const fullNameArr = fullNameWithDash.split("-");
+
+	const firstName = fullNameArr[0];
+	const lastName = fullNameArr[1];
+
+	const fullName =
+		firstName.charAt(0).toUpperCase() +
+		firstName.slice(1) +
+		" " +
+		lastName.charAt(0).toUpperCase() +
+		lastName.slice(1);
+
 	return (
 		<section>
-			Search results for {firstname} {lastname}
+			<h3>Search results for {fullName}:</h3>
 		</section>
 	);
 };
@@ -94,6 +107,39 @@ export const UsersList = () => {
 						<li key={user.email}>
 							{" "}
 							{user.name} - {user.email}{" "}
+						</li>
+					))}
+				</ul>
+			) : null}
+		</div>
+	);
+};
+
+export const CharSearch = () => {
+	const [chars, setChars] = useState([]);
+
+	useEffect(() => {
+		const getChars = async () => {
+			//const usersRes = await axios.get("http://localhost:8080/users");
+			const charsRes = await axios({
+				method: "SEARCH",
+				url: "http://localhost:8080/search/september-snow",
+			});
+			return charsRes.data;
+		};
+
+		getChars().then(setChars);
+	}, []);
+
+	return (
+		<div>
+			<h2>Users:</h2>
+			{chars ? (
+				<ul>
+					{chars.map((char: { id: number; desc: string }) => (
+						<li key={char.id}>
+							{" "}
+							{char.desc} - {char.id}{" "}
 						</li>
 					))}
 				</ul>

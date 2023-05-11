@@ -44,7 +44,7 @@ export function App() {
 								<Link to="/randomProfile">Random Profile</Link>
 							</li>
 							<li>
-								<Link to="/search/winter-snow">Character Search</Link>
+								<Link to="/search/september-snow">Character Search</Link>
 							</li>
 						</menu>
 					</nav>
@@ -54,7 +54,7 @@ export function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/match" element={<Match />} />
 						<Route path="/randomProfile" element={<RandomProfile />} />
-						<Route path="/search/:firstname/:lastname" element={<NameSearch />} />
+						<Route path="/search/:fullNameWithDash" element={<NameSearch />} />
 					</Routes>
 				</main>
 				<footer>Copyright 2023 Pears' Character Profiles</footer>
