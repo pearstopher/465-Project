@@ -89,26 +89,44 @@ export const Button = () => {
 };
 
 export const SearchButton = () => {
-	const [clicks, searchResutls] = useState(0);
+	const [fName, setFName] = useState("First");
+	const [lName, setLName] = useState("Last");
+	const [clicks, setClicks] = useState(0);
 
 	const navigate = useNavigate();
+
+	const clearFirst = (e) => {
+		const val = e.target.value;
+		if (val === "First") {
+			e.target.value = "";
+			setFName("");
+		}
+	};
+
+	const clearLast = (e) => {
+		const val = e.target.value;
+		if (val === "Last") {
+			e.target.value = "";
+			setLName("");
+		}
+	};
 
 	return (
 		<div id={"searchForm"}>
 			<input
 				id={"firstName"}
 				defaultValue={"First"}
-				onClick={() => {
-					const firstName = document.getElementById("firstName");
-					firstName.value = "";
+				onClick={(e) => {
+					// const firstName = document.getElementById("firstName");
+					clearFirst(e);
 				}}
 			/>
 			<input
 				id={"lastName"}
 				defaultValue={"Last"}
-				onClick={() => {
-					const lastName = document.getElementById("lastName");
-					lastName.value = "";
+				onClick={(e) => {
+					// const lastName = document.getElementById("lastName");
+					clearLast(e);
 				}}
 			/>
 			<button
