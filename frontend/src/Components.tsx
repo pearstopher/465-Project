@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export const Match = () => {
 	return <div>"MATCH PAGE"</div>;
@@ -88,6 +88,42 @@ export const Button = () => {
 	);
 };
 
+export const SearchButton = () => {
+	const [clicks, searchResutls] = useState(0);
+
+	const navigate = useNavigate();
+
+	return (
+		<div id={"searchForm"}>
+			<input
+				id={"firstName"}
+				defaultValue={"First"}
+				onClick={() => {
+					const firstName = document.getElementById("firstName");
+					firstName.value = "";
+				}}
+			/>
+			<input
+				id={"lastName"}
+				defaultValue={"Last"}
+				onClick={() => {
+					const lastName = document.getElementById("lastName");
+					lastName.value = "";
+				}}
+			/>
+			<button
+				onClick={() => {
+					const firstName = document.getElementById("firstName");
+					const lastName = document.getElementById("lastName");
+					navigate(`/search/${firstName.value}-${lastName.value}`);
+				}}
+			>
+				Clicks: {clicks}
+			</button>
+		</div>
+	);
+};
+
 export const UsersList = () => {
 	const [users, setUsers] = useState([]);
 
@@ -117,7 +153,7 @@ export const UsersList = () => {
 	);
 };
 
-export const CharSearch = () => {
+export const CharSearch = (firstName: string, lastName: string) => {
 	const [chars, setChars] = useState([]);
 
 	useEffect(() => {
@@ -125,7 +161,7 @@ export const CharSearch = () => {
 			//const usersRes = await axios.get("http://localhost:8080/users");
 			const charsRes = await axios({
 				method: "SEARCH",
-				url: "http://localhost:8080/search/september-snow",
+				url: `http://localhost:8080/search/${firstName}-${lastName}`,
 			});
 			return charsRes.data;
 		};

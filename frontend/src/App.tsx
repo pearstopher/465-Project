@@ -1,5 +1,6 @@
 import {
 	Button,
+	SearchButton,
 	Header,
 	Home,
 	UsersList,
@@ -52,6 +53,7 @@ export function App() {
 				</header>
 				<main>
 					<Button />
+					<SearchButton />
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/match" element={<Match />} />
