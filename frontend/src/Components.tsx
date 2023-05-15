@@ -109,12 +109,15 @@ export const SearchButton = () => {
 
 	const addFirst = (e) => {
 		let val = e.target.value;
+		console.log(e.target.selectionStart);
+		console.log(fPrev);
 		if (val === "") {
+			val = "First";
 			e.target.value = "First";
 			setFName("First");
 			e.target.setSelectionRange(0, 0);
 		}
-		if (fPrev === "First" || e.target.selectionStart === 1) {
+		if (fPrev === "First" && e.target.selectionStart === 1) {
 			val = val.substring(0, 1);
 			e.target.value = val;
 			setFName(val);
