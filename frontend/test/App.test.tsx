@@ -18,16 +18,18 @@ test("loads and displays greeting", async () => {
 	// Arrange -- This fake-renders our component to a mock browser
 	const testRender = render(<App />);
 	// Act - This simulates a person clicking in the browser
-	fireEvent.click(screen.getByText("count is 0"));
+	fireEvent.click(screen.getByText("Clicks: 0"));
 	// Assert - This tests to make sure the event we just fired did what we expect (increment count)
-	expect(screen.getByText("count is 1")).toBeVisible();
+	expect(screen.getByText("Clicks: 1")).toBeVisible();
+	fireEvent.click(screen.getByText("Clicks: 1"));
+	expect(screen.getByText("Clicks: 2")).toBeVisible();
 });
 
 describe("Renders React components correctly", async () => {
 	it("Should render the page correctly", async () => {
 		const testRender = render(<App />);
 		// Setup
-		const h1 = await screen.queryByText("Vite + React");
+		const h1 = await screen.queryByText("Pears' Character Profiles");
 
 		// Expectations
 		expect(h1).not.toBeNull();
