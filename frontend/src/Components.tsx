@@ -91,38 +91,30 @@ export const Button = () => {
 export const SearchButton = () => {
 	const [fName, setFName] = useState("First");
 	const [lName, setLName] = useState("Last");
-	const [fPrev, setFPrev] = useState("");
-	const [lPrev, setLPrev] = useState("");
 	const [clicks, setClicks] = useState(0);
 
 	const navigate = useNavigate();
 
 	const clearFirst = (e) => {
-		console.log(fPrev);
 		const val = e.target.value;
 		if (val === "First") {
 			e.target.value = "";
-			setFName("");
-			setFPrev("First");
+			setFName("First");
 		}
 	};
 
 	const addFirst = (e) => {
 		let val = e.target.value;
-		console.log(e.target.selectionStart);
-		console.log(fPrev);
 		if (val === "") {
 			val = "First";
 			e.target.value = "First";
-			setFName("First");
 			e.target.setSelectionRange(0, 0);
 		}
-		if (fPrev === "First" && e.target.selectionStart === 1) {
+		if (fName === "First" && e.target.selectionStart === 1) {
 			val = val.substring(0, 1);
 			e.target.value = val;
-			setFName(val);
 		}
-		setFPrev(val);
+		setFName(val);
 	};
 
 	const clearLast = (e) => {
@@ -144,6 +136,11 @@ export const SearchButton = () => {
 				}}
 				onChange={(e) => {
 					addFirst(e);
+				}}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						navigate(`/search/${fName}-${lName}`);
+					}
 				}}
 			/>
 			<input
