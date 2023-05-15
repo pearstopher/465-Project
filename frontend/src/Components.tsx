@@ -153,9 +153,10 @@ export const SearchButton = () => {
 			/>
 			<button
 				onClick={() => {
-					const firstName = document.getElementById("firstName");
-					const lastName = document.getElementById("lastName");
-					navigate(`/search/${firstName.value}-${lastName.value}`);
+					//const firstName = document.getElementById("firstName");
+					//const lastName = document.getElementById("lastName");
+					//navigate(`/search/${firstName.value}-${lastName.value}`);
+					navigate(`/search/${fName}-${lName}`);
 				}}
 			>
 				Clicks: {clicks}
