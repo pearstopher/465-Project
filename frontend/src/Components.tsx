@@ -115,7 +115,7 @@ export const SearchButton = () => {
 		<div id={"searchForm"}>
 			<input
 				id={"firstName"}
-				defaultValue={"First"}
+				defaultValue={fName}
 				onClick={(e) => {
 					// const firstName = document.getElementById("firstName");
 					clearFirst(e);
