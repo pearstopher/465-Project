@@ -89,32 +89,47 @@ export const Button = () => {
 };
 
 export const SearchButton = () => {
-	const [fName, setFName] = useState("First");
-	const [lName, setLName] = useState("Last");
+	const firstVal = "First";
+	const lastVal = "Last";
+	const [fName, setFName] = useState(firstVal);
+	const [lName, setLName] = useState(lastVal);
 	const [clicks, setClicks] = useState(0);
 
 	const navigate = useNavigate();
 
 	const clearFirst = (e) => {
 		const val = e.target.value;
-		if (val === "First") {
+		const defaultVal = e.target.defaultValue;
+		if (val === defaultVal) {
 			e.target.value = "";
-			setFName("First");
+			if (defaultVal === firstVal) {
+				setFName(defaultVal);
+			} else {
+				setLName(defaultVal);
+			}
 		}
 	};
 
 	const addFirst = (e) => {
 		let val = e.target.value;
+		const defaultVal = e.target.defaultValue;
 		if (val === "") {
-			val = "First";
-			e.target.value = "First";
+			val = defaultVal;
+			e.target.value = defaultVal;
 			e.target.setSelectionRange(0, 0);
 		}
-		if (fName === "First" && e.target.selectionStart === 1) {
-			val = val.substring(0, 1);
-			e.target.value = val;
+		if (fName === defaultVal || lName === defaultVal) {
+			if (e.target.selectionStart === 1) {
+				val = val.substring(0, 1);
+				e.target.value = val;
+			}
 		}
-		setFName(val);
+
+		if (defaultVal === firstVal) {
+			setFName(val);
+		} else {
+			setLName(val);
+		}
 	};
 
 	const clearLast = (e) => {
@@ -129,7 +144,7 @@ export const SearchButton = () => {
 		<div id={"searchForm"}>
 			<input
 				id={"firstName"}
-				defaultValue={fName}
+				defaultValue={firstVal}
 				onClick={(e) => {
 					// const firstName = document.getElementById("firstName");
 					clearFirst(e);
@@ -145,10 +160,18 @@ export const SearchButton = () => {
 			/>
 			<input
 				id={"lastName"}
-				defaultValue={"Last"}
+				defaultValue={lastVal}
 				onClick={(e) => {
 					// const lastName = document.getElementById("lastName");
-					clearLast(e);
+					clearFirst(e);
+				}}
+				onChange={(e) => {
+					addFirst(e);
+				}}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						navigate(`/search/${fName}-${lName}`);
+					}
 				}}
 			/>
 			<button
