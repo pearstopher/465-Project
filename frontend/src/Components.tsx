@@ -182,7 +182,7 @@ export const SearchButton = () => {
 					navigate(`/search/${fName}-${lName}`);
 				}}
 			>
-				Clicks: {clicks}
+				Search
 			</button>
 		</div>
 	);
