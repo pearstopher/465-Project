@@ -30,26 +30,31 @@ export const RandomProfile = () => {
 
 export const Character = () => {
 	const { idParam } = useParams();
-	const id = parseInt(idParam);
+	let id = parseInt(idParam);
 	if (isNaN(id)) {
-		return (
-			<section>
-				<h3>Error</h3>
-				<p>Invalid Character ID</p>
-			</section>
-		);
+		id = 0;
 	}
 
 	const [charId, setCharId] = useState(id);
 
+	const [charInfo, setCharInfo] = useState([]);
+
 	useEffect(() => {
-		//query and return character info
+		const getCharInfo = async () => {
+			const usersRes = await axios.get(`https://xivapi.com/character/${charId}`);
+			return usersRes.data;
+		};
+
+		getCharInfo().then(setCharInfo);
 	}, [charId]);
 
 	return (
-		<section>
-			<h3>Character Information:</h3>
-		</section>
+		<div>
+			<h3>Character Info: </h3>
+			<h4>Name</h4>
+			<p>{charInfo.Character.Name}</p>
+			<code>{JSON.stringify(charInfo)}</code>
+		</div>
 	);
 };
 
