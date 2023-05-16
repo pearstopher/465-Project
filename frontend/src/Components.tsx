@@ -47,7 +47,7 @@ export const NameSearch = () => {
 
 			<h3>Search results for {fullName}:</h3>
 
-			<CharSearch />
+			<CharSearch fName={firstName} lName={lastName} />
 		</section>
 	);
 };
@@ -221,7 +221,7 @@ export const UsersList = () => {
 	);
 };
 
-export const CharSearch = (firstName: string, lastName: string) => {
+export const CharSearch = (props) => {
 	const [chars, setChars] = useState([]);
 
 	useEffect(() => {
@@ -229,7 +229,7 @@ export const CharSearch = (firstName: string, lastName: string) => {
 			//const usersRes = await axios.get("http://localhost:8080/users");
 			const charsRes = await axios({
 				method: "SEARCH",
-				url: `http://localhost:8080/search/${firstName}-${lastName}`,
+				url: `http://localhost:8080/search/${props.fName}-${props.lName}`,
 			});
 			return charsRes.data;
 		};
