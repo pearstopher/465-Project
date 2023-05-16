@@ -27,12 +27,15 @@ export const RandomProfile = () => {
 };
 
 export const NameSearch = () => {
-	// extract the name from the url
 	const { fullNameWithDash } = useParams();
+	// extract the name from the url
 	const fullNameArr = fullNameWithDash.split("-");
+	console.log("1" + fullNameWithDash);
 
 	const firstName = fullNameArr[0];
 	const lastName = fullNameArr[1];
+	//setFNameParam(firstName);
+	//setLNameParam(lastName);
 
 	const fullName =
 		firstName.charAt(0).toUpperCase() +
@@ -40,14 +43,23 @@ export const NameSearch = () => {
 		" " +
 		lastName.charAt(0).toUpperCase() +
 		lastName.slice(1);
+	//setFullNameParam(fullName);
+
+	const [fNameParam, setFNameParam] = useState(firstName);
+	const [lNameParam, setLNameParam] = useState(lastName);
+	const [fullNameParam, setFullNameParam] = useState(fullName);
+
+	useEffect(() => {
+		console.log("2" + fullNameWithDash);
+	}, [fullNameWithDash]);
 
 	return (
 		<section>
 			<SearchButton />
 
-			<h3>Search results for {fullName}:</h3>
+			<h3>Search results for {fullNameParam}:</h3>
 
-			<CharSearch fName={firstName} lName={lastName} />
+			<CharSearch fName={fNameParam} lName={lNameParam} />
 		</section>
 	);
 };
