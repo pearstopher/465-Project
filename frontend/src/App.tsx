@@ -1,11 +1,9 @@
 import {
 	Button,
 	SearchButton,
-	Header,
 	Home,
 	UsersList,
 	Match,
-	Messages,
 	RandomProfile,
 	NameSearch,
 	CharSearch,
