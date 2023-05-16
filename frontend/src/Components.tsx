@@ -51,6 +51,22 @@ export const NameSearch = () => {
 
 	useEffect(() => {
 		//console.log("2" + fullNameWithDash);
+		// extract the name from the url
+		const fullNameArr = fullNameWithDash.split("-");
+		//console.log("1" + fullNameWithDash);
+
+		const firstName = fullNameArr[0];
+		const lastName = fullNameArr[1];
+		setFNameParam(firstName);
+		setLNameParam(lastName);
+
+		const fullName =
+			firstName.charAt(0).toUpperCase() +
+			firstName.slice(1) +
+			" " +
+			lastName.charAt(0).toUpperCase() +
+			lastName.slice(1);
+		setFullNameParam(fullName);
 	}, [fullNameWithDash]);
 
 	return (
