@@ -252,11 +252,8 @@ export const UsersList = () => {
 export const CharSearch = (props) => {
 	const [chars, setChars] = useState([]);
 
-	const { fullNameWithDash } = useParams();
-	console.log("1" + fullNameWithDash);
-
 	useEffect(() => {
-		console.log("2" + fullNameWithDash);
+		console.log("2");
 		console.log(props.fName); // props not changing
 
 		const getChars = async () => {
@@ -269,7 +266,7 @@ export const CharSearch = (props) => {
 		};
 
 		getChars().then(setChars);
-	}, [fullNameWithDash]);
+	}, [props.fName, props.lName]);
 
 	return (
 		<div>
