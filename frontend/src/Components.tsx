@@ -38,7 +38,12 @@ export const Character = () => {
 
 	const [charId, setCharId] = useState(id);
 	const temp: CharacterResponse = {
-		Character: { Name: "No Name", Nameday: "No Nameday", Portrait: "default" },
+		Character: {
+			Name: "No Name",
+			Nameday: "No Nameday",
+			Portrait: "default image",
+			Avatar: "default image",
+		},
 	};
 	const [charInfo, setCharInfo] = useState(temp);
 
@@ -62,6 +67,11 @@ export const Character = () => {
 			<img
 				src={charInfo.Character.Portrait}
 				alt={`Character Portrait of ${charInfo.Character.Name} from The Lodestone`}
+			/>
+			<p>Avatar</p>
+			<img
+				src={charInfo.Character.Avatar}
+				alt={`Character Avatar of ${charInfo.Character.Name} from The Lodestone`}
 			/>
 			{
 				// can look at the whole response if anything goes wrong
