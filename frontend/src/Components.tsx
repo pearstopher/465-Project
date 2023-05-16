@@ -59,8 +59,14 @@ export const Character = () => {
 			<h4>Birthday</h4>
 			<p>{charInfo.Character.Nameday}</p>
 			<h4>Portrait</h4>
-			<img src={charInfo.Character.Portrait} alt={"Character Portrait from LodeStone"} />
-			<code>{JSON.stringify(charInfo)}</code>
+			<img
+				src={charInfo.Character.Portrait}
+				alt={`Character Portrait of ${charInfo.Character.Name} from The Lodestone`}
+			/>
+			{
+				// can look at the whole response if anything goes wrong
+				//<code>{JSON.stringify(charInfo)}</code>
+			}
 		</div>
 	);
 };
