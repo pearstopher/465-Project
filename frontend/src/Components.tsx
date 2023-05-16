@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
 import { useParams, useNavigate } from "react-router-dom";
-import { CharacterResponse } from "@/DoggrTypes.ts";
+import { CharacterResponse } from "@/PCPTypes.ts";
 
 export const Match = () => {
 	return <div>"MATCH PAGE"</div>;
