@@ -1,12 +1,22 @@
 export type State = {
-	currentProfile: ProfileType
-	likeHistory: Array<ProfileType>,
-	passHistory: Array<ProfileType>
-}
+	currentProfile: ProfileType;
+	likeHistory: Array<ProfileType>;
+	passHistory: Array<ProfileType>;
+};
 
 export type ProfileType = {
-	imgUri: string,
-	thumbUri: string,
-	name: string,
-	id: number,
-}
+	imgUri: string;
+	thumbUri: string;
+	name: string;
+	id: number;
+};
+
+//there is a lot more than this and the response may change
+//for now I'm just adding things here if I'm going to try to use them!
+export type CharacterResponse = {
+	Character: {
+		Name: string;
+		Nameday: string;
+		Portrait: string;
+	};
+};

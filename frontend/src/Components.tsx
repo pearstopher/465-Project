@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
 import { useParams, useNavigate } from "react-router-dom";
+import { CharacterResponse } from "@/DoggrTypes.ts";
 
 export const Match = () => {
 	return <div>"MATCH PAGE"</div>;
@@ -36,12 +37,14 @@ export const Character = () => {
 	}
 
 	const [charId, setCharId] = useState(id);
-
-	const [charInfo, setCharInfo] = useState([]);
+	const temp: CharacterResponse = {
+		Character: { Name: "No Name", Nameday: "No Nameday", Portrait: "default" },
+	};
+	const [charInfo, setCharInfo] = useState(temp);
 
 	useEffect(() => {
 		const getCharInfo = async () => {
-			const usersRes = await axios.get(`https://xivapi.com/character/${charId}`);
+			const usersRes = await axios.get<CharacterResponse>(`https://xivapi.com/character/${charId}`);
 			return usersRes.data;
 		};
 
@@ -53,6 +56,10 @@ export const Character = () => {
 			<h3>Character Info: </h3>
 			<h4>Name</h4>
 			<p>{charInfo.Character.Name}</p>
+			<h4>Birthday</h4>
+			<p>{charInfo.Character.Nameday}</p>
+			<h4>Portrait</h4>
+			<img src={charInfo.Character.Portrait} alt={"Character Portrait from LodeStone"} />
 			<code>{JSON.stringify(charInfo)}</code>
 		</div>
 	);
