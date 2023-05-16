@@ -246,9 +246,6 @@ export const CharSearch = (props) => {
 	const [chars, setChars] = useState([]);
 
 	useEffect(() => {
-		console.log("2");
-		console.log(props.fName); // props not changing
-
 		const getChars = async () => {
 			//const usersRes = await axios.get("http://localhost:8080/users");
 			const charsRes = await axios({
