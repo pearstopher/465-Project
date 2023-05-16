@@ -30,7 +30,7 @@ export const NameSearch = () => {
 	const { fullNameWithDash } = useParams();
 	// extract the name from the url
 	const fullNameArr = fullNameWithDash.split("-");
-	console.log("1" + fullNameWithDash);
+	//console.log("1" + fullNameWithDash);
 
 	const firstName = fullNameArr[0];
 	const lastName = fullNameArr[1];
@@ -50,7 +50,7 @@ export const NameSearch = () => {
 	const [fullNameParam, setFullNameParam] = useState(fullName);
 
 	useEffect(() => {
-		console.log("2" + fullNameWithDash);
+		//console.log("2" + fullNameWithDash);
 	}, [fullNameWithDash]);
 
 	return (
@@ -236,7 +236,13 @@ export const UsersList = () => {
 export const CharSearch = (props) => {
 	const [chars, setChars] = useState([]);
 
+	const { fullNameWithDash } = useParams();
+	console.log("1" + fullNameWithDash);
+
 	useEffect(() => {
+		console.log("2" + fullNameWithDash);
+		console.log(props.fName); // props not changing
+
 		const getChars = async () => {
 			//const usersRes = await axios.get("http://localhost:8080/users");
 			const charsRes = await axios({
@@ -247,7 +253,7 @@ export const CharSearch = (props) => {
 		};
 
 		getChars().then(setChars);
-	}, []);
+	}, [fullNameWithDash]);
 
 	return (
 		<div>
