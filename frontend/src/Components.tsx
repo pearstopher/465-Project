@@ -14,6 +14,8 @@ export const Home = () => {
 
 			<Title />
 			<Subtitle />
+
+			<FeaturedChars />
 		</section>
 	);
 };
@@ -264,6 +266,38 @@ export const CharSearch = (props) => {
 			{chars ? (
 				<ul>
 					{chars.map((char: { id: number; desc: string }) => (
+						<li key={char.id}>
+							{" "}
+							{char.desc} - {char.id}{" "}
+						</li>
+					))}
+				</ul>
+			) : null}
+		</div>
+	);
+};
+
+export const FeaturedChars = (props) => {
+	const [featuredChars, setFeaturedChars] = useState([]);
+
+	useEffect(() => {
+		const getFeaturedChars = async () => {
+			const charsRes = await axios({
+				method: "GET",
+				url: `http://localhost:8080/featured/`,
+			});
+			return charsRes.data;
+		};
+
+		getFeaturedChars().then(setFeaturedChars);
+	}, []);
+
+	return (
+		<div>
+			<h4>Featured Characters:</h4>
+			{featuredChars ? (
+				<ul>
+					{featuredChars.map((char: { id: number; desc: string }) => (
 						<li key={char.id}>
 							{" "}
 							{char.desc} - {char.id}{" "}
