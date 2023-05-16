@@ -70,6 +70,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "boolean"
+        },
+        "featured": {
+          "name": "featured",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "boolean"
         }
       },
       "name": "characters",

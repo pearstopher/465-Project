@@ -16,4 +16,7 @@ export class Char extends BaseEntity {
 	// if hidden will not display in public search results
 	@Property()
 	hidden!: boolean;
+
+	@Property()
+	featured!: boolean;
 }
