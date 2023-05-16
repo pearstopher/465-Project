@@ -28,37 +28,15 @@ export const RandomProfile = () => {
 
 export const NameSearch = () => {
 	const { fullNameWithDash } = useParams();
-	// extract the name from the url
-	const fullNameArr = fullNameWithDash.split("-");
-	//console.log("1" + fullNameWithDash);
 
-	const firstName = fullNameArr[0];
-	const lastName = fullNameArr[1];
-	//setFNameParam(firstName);
-	//setLNameParam(lastName);
-
-	const fullName =
-		firstName.charAt(0).toUpperCase() +
-		firstName.slice(1) +
-		" " +
-		lastName.charAt(0).toUpperCase() +
-		lastName.slice(1);
-	//setFullNameParam(fullName);
-
-	const [fNameParam, setFNameParam] = useState(firstName);
-	const [lNameParam, setLNameParam] = useState(lastName);
-	const [fullNameParam, setFullNameParam] = useState(fullName);
-
-	useEffect(() => {
-		//console.log("2" + fullNameWithDash);
+	const extractName = (
+		fullNameWithDash
+	): { firstName: string; lastName: string; fullName: string } => {
 		// extract the name from the url
 		const fullNameArr = fullNameWithDash.split("-");
-		//console.log("1" + fullNameWithDash);
 
 		const firstName = fullNameArr[0];
 		const lastName = fullNameArr[1];
-		setFNameParam(firstName);
-		setLNameParam(lastName);
 
 		const fullName =
 			firstName.charAt(0).toUpperCase() +
@@ -66,7 +44,22 @@ export const NameSearch = () => {
 			" " +
 			lastName.charAt(0).toUpperCase() +
 			lastName.slice(1);
-		setFullNameParam(fullName);
+
+		return { firstName: firstName, lastName: lastName, fullName: fullName };
+	};
+
+	const name = extractName(fullNameWithDash);
+
+	const [fNameParam, setFNameParam] = useState(name.firstName);
+	const [lNameParam, setLNameParam] = useState(name.lastName);
+	const [fullNameParam, setFullNameParam] = useState(name.fullName);
+
+	useEffect(() => {
+		const name = extractName(fullNameWithDash);
+
+		setFNameParam(name.firstName);
+		setLNameParam(name.lastName);
+		setFullNameParam(name.fullName);
 	}, [fullNameWithDash]);
 
 	return (
