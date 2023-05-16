@@ -52,8 +52,9 @@ export function App() {
 					</nav>
 				</header>
 				<main>
-					<Button />
-					<SearchButton />
+					{
+						//<Button />
+					}
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/match" element={<Match />} />

@@ -10,6 +10,8 @@ export const Match = () => {
 export const Home = () => {
 	return (
 		<section>
+			<SearchButton />
+
 			<Title />
 			<Subtitle />
 		</section>
@@ -41,6 +43,8 @@ export const NameSearch = () => {
 
 	return (
 		<section>
+			<SearchButton />
+
 			<h3>Search results for {fullName}:</h3>
 
 			<CharSearch />
