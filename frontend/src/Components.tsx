@@ -28,6 +28,31 @@ export const RandomProfile = () => {
 	);
 };
 
+export const Character = () => {
+	const { idParam } = useParams();
+	const id = parseInt(idParam);
+	if (isNaN(id)) {
+		return (
+			<section>
+				<h3>Error</h3>
+				<p>Invalid Character ID</p>
+			</section>
+		);
+	}
+
+	const [charId, setCharId] = useState(id);
+
+	useEffect(() => {
+		//query and return character info
+	}, [charId]);
+
+	return (
+		<section>
+			<h3>Character Information:</h3>
+		</section>
+	);
+};
+
 export const NameSearch = () => {
 	const { fullNameWithDash } = useParams();
 

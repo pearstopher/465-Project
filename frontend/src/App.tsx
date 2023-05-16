@@ -9,6 +9,7 @@ import {
 	RandomProfile,
 	NameSearch,
 	CharSearch,
+	Character,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
@@ -43,6 +44,9 @@ export function App() {
 								<Link to="/profile">My Profile</Link>
 							</li>
 							<li>
+								<Link to="/character/42934531">Example Profile</Link>
+							</li>
+							<li>
 								<Link to="/randomProfile">Random Profile</Link>
 							</li>
 							<li>
@@ -58,6 +62,7 @@ export function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/match" element={<Match />} />
+						<Route path="/character/:idParam" element={<Character />} />
 						<Route path="/randomProfile" element={<RandomProfile />} />
 						<Route path="/search/:fullNameWithDash" element={<NameSearch />} />
 					</Routes>
