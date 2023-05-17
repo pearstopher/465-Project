@@ -49,8 +49,15 @@ export const MyProfile = () => {
 export const AddChar = () => {
 	const firstVal = "First";
 	const lastVal = "Last";
+	const idVal = "ID";
+	const descVal = "Character Description";
+	const hiddenVal = true;
 	const [fName, setFName] = useState(firstVal);
 	const [lName, setLName] = useState(lastVal);
+	const [id, setId] = useState(idVal);
+	const [desc, setDesc] = useState(descVal);
+	const [hidden, setHidden] = useState(hiddenVal);
+
 	const [clicks, setClicks] = useState(0);
 	const [newCharInfo, setNewCharInfo] = useState([]);
 	const [formSubmit, setFormSubmit] = useState(false);
@@ -110,6 +117,7 @@ export const AddChar = () => {
 			} catch (e) {
 				setAddCharMessage(`Error Creating Character. ${e.message}.`);
 				console.log(e);
+				return e;
 			}
 		};
 
@@ -155,6 +163,42 @@ export const AddChar = () => {
 						}
 					}}
 				/>
+				<input
+					id={"addCharID"}
+					defaultValue={idVal}
+					onClick={(e) => {
+						clearFirst(e);
+					}}
+					onChange={(e) => {
+						addFirst(e);
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}
+				/>
+				<textarea
+					id={"addCharDesc"}
+					defaultValue={descVal}
+					onClick={(e) => {
+						clearFirst(e);
+					}}
+					onChange={(e) => {
+						addFirst(e);
+					}}
+					//it would suck if you couldn't press Enter in a textarea tho
+					/*onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}*/
+				/>
+				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name</label>
+				<input type={"checkbox"} id={"addCharHidden"} defaultChecked={hiddenVal} />
+
 				<button
 					id={"addCharSubmit"}
 					onClick={() => {
