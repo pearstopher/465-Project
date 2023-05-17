@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
 import { useParams, useNavigate } from "react-router-dom";
-import { CharacterResponse } from "@/PCPTypes.ts";
+import { Char, CharacterResponse } from "@/PCPTypes.ts";
 import avatar from "@images/avatar.jpg";
 import portrait from "@images/portrait.jpg";
 
@@ -292,7 +292,7 @@ export const Character = () => {
 	}
 
 	const [charId, setCharId] = useState(id);
-	const temp: CharacterResponse = {
+	const tempCharResponse: CharacterResponse = {
 		Character: {
 			Name: "No Character",
 			Nameday: "No Nameday",
@@ -301,14 +301,33 @@ export const Character = () => {
 			Avatar: avatar,
 		},
 	};
-	const [charInfo, setCharInfo] = useState(temp);
+	const tempChar: Char = {
+		id: 0,
+		created_at: new Date(),
+		updated_at: new Date(),
+		fName: "First",
+		lName: "Last",
+		desc: "Description",
+		hidden: true,
+		featured: false,
+	};
+	const [charInfo, setCharInfo] = useState(tempChar);
+	const [charInfoFromLodestone, setCharInfoFromLodestone] = useState(tempCharResponse);
 
 	useEffect(() => {
-		const getCharInfo = async () => {
+		const getCharInfoFromLodestone = async () => {
 			const usersRes = await axios.get<CharacterResponse>(`https://xivapi.com/character/${charId}`);
 			return usersRes.data;
 		};
+		getCharInfoFromLodestone().then(setCharInfoFromLodestone);
 
+		const getCharInfo = async () => {
+			//this is the first time I've seen used the two links together!
+			//I wasn't copying them but it's great we both chose /character/id
+			//I mean it makes sense! I built mine first tho!
+			const usersRes = await axios.get<Char>(`http://localhost:8080/character/${charId}`);
+			return usersRes.data;
+		};
 		getCharInfo().then(setCharInfo);
 	}, [charId]);
 
@@ -316,20 +335,26 @@ export const Character = () => {
 		<section>
 			<h3>Character Info: </h3>
 			<h4>Name</h4>
-			<p>{charInfo.Character.Name}</p>
+			<p>{charInfoFromLodestone.Character.Name}</p>
 			<h4>Birthday</h4>
-			<p>{charInfo.Character.Nameday}</p>
+			<p>{charInfoFromLodestone.Character.Nameday}</p>
+			{
+				//<h4>Bio</h4>
+				//<p>{charInfoFromLodestone.Character.Bio}</p>
+				//in-game short bio
+			}
 			<h4>Bio</h4>
-			<p>{charInfo.Character.Bio}</p>
+			<p>{charInfo.desc}</p>
+
 			<h4>Portrait</h4>
 			<img
-				src={charInfo.Character.Portrait}
-				alt={`Character Portrait of ${charInfo.Character.Name} from The Lodestone`}
+				src={charInfoFromLodestone.Character.Portrait}
+				alt={`Character Portrait of ${charInfoFromLodestone.Character.Name} from The Lodestone`}
 			/>
 			<p>Avatar</p>
 			<img
-				src={charInfo.Character.Avatar}
-				alt={`Character Avatar of ${charInfo.Character.Name} from The Lodestone`}
+				src={charInfoFromLodestone.Character.Avatar}
+				alt={`Character Avatar of ${charInfoFromLodestone.Character.Name} from The Lodestone`}
 			/>
 			{
 				// can look at the whole response if anything goes wrong
