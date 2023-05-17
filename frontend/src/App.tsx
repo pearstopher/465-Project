@@ -10,6 +10,7 @@ import {
 	Character,
 	Title,
 	Subtitle,
+	MyProfile,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
@@ -41,7 +42,7 @@ export function App() {
 								<Link to="/">Home</Link>
 							</li>
 							<li>
-								<Link to="/randomProfile">Profile</Link>
+								<Link to="/myProfile">My Profile</Link>
 							</li>
 							<li>
 								<Link to="/character/42934531">Example Profile</Link>
@@ -59,7 +60,7 @@ export function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/character/:idParam" element={<Character />} />
-						<Route path="/randomProfile" element={<RandomProfile />} />
+						<Route path="/myProfile" element={<MyProfile />} />
 						<Route path="/search/:fullNameWithDash?" element={<NameSearch />} />
 					</Routes>
 				</main>
