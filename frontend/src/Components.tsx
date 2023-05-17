@@ -331,10 +331,10 @@ export const CharSearch = (props) => {
 			<h4>Characters:</h4>
 			{chars ? (
 				<ul>
-					{chars.map((char: { id: number; desc: string }) => (
+					{chars.map((char: { id: number; fName: string; lName: string; desc: string }) => (
 						<li key={char.id}>
 							{" "}
-							{char.desc} - {char.id}{" "}
+							{char.desc} - {char.id} <Link id={char.id} name={`${char.fName} ${char.lName}`} />
 						</li>
 					))}
 				</ul>
@@ -366,7 +366,8 @@ export const FeaturedChars = (props) => {
 					{featuredChars.map((char: { id: number; fName: string; lName: string; desc: string }) => (
 						<li key={char.id}>
 							{" "}
-							{char.desc} - {char.id} <Link id={char.id} name={`${char.fName} ${char.lName}`} />
+							{char.desc} - {char.id}
+							<Link id={char.id} name={`${char.fName} ${char.lName}`} />
 						</li>
 					))}
 				</ul>
