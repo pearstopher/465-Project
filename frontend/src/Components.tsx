@@ -107,16 +107,17 @@ export const AddChar = () => {
 			}
 		}
 
+		//figure out which element we're in so I know which one to update the state of
 		if (defaultVal === firstVal) {
-			setFName(defaultVal);
+			setFName(val);
 		} else if (defaultVal === lastVal) {
-			setLName(defaultVal);
+			setLName(val);
 		} else if (defaultVal === idVal) {
-			setId(defaultVal);
+			setId(val);
 		} else if (defaultVal === descVal) {
-			setDesc(defaultVal);
+			setDesc(val);
 		} else if (defaultVal === hiddenVal) {
-			setHidden(defaultVal);
+			setHidden(val);
 		}
 	};
 
