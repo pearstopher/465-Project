@@ -11,10 +11,13 @@ export const Match = () => {
 export const Home = () => {
 	return (
 		<section>
-			<SearchButton />
+			<h3>Welcome</h3>
+			<p>
+				Welcome to Pears' Character Profiles. You can use this site to browse the characters I have
+				created so far, and to create your own!
+			</p>
 
-			<Title />
-			<Subtitle />
+			<SearchButton />
 
 			<FeaturedChars />
 		</section>
@@ -129,11 +132,11 @@ export const NameSearch = () => {
 };
 
 export function Title() {
-	return <h3>section title</h3>;
+	return <h1>Pears' Character Profiles</h1>;
 }
 
 export function Subtitle() {
-	return <h4>section subtitle</h4>;
+	return <h2>By Pearstopher</h2>;
 }
 
 export function Image() {
@@ -222,6 +225,7 @@ export const SearchButton = () => {
 
 	return (
 		<div id={"searchForm"}>
+			<h4>Character Search</h4>
 			<input
 				id={"firstName"}
 				defaultValue={firstVal}
