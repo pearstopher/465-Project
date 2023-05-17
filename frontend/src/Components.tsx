@@ -47,9 +47,9 @@ export const MyProfile = () => {
 };
 
 export const AddChar = () => {
-	const firstVal = "First";
-	const lastVal = "Last";
-	const idVal = "ID";
+	const firstVal = "First Name";
+	const lastVal = "Last Name";
+	const idVal = "Lodestone ID";
 	const descVal = "Character Description";
 	const hiddenVal = true;
 	const [fName, setFName] = useState(firstVal);
@@ -148,6 +148,10 @@ export const AddChar = () => {
 						}
 					}}
 				/>
+				<label htmlFor={"addCharFirstName"} className={"hidden"}>
+					{firstVal}
+				</label>
+
 				<input
 					type={"text"}
 					id={"addCharLastName"}
@@ -165,6 +169,10 @@ export const AddChar = () => {
 						}
 					}}
 				/>
+				<label htmlFor={"addCharLastName"} className={"hidden"}>
+					{lastVal}
+				</label>
+
 				<input
 					type={"text"}
 					id={"addCharID"}
@@ -182,6 +190,10 @@ export const AddChar = () => {
 						}
 					}}
 				/>
+				<label htmlFor={"addCharID"} className={"hidden"}>
+					{idVal}
+				</label>
+
 				<textarea
 					id={"addCharDesc"}
 					defaultValue={descVal}
@@ -199,10 +211,15 @@ export const AddChar = () => {
 						}
 					}}*/
 				/>
-				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name</label>
+				<label htmlFor={"addCharDesc"} className={"hidden"}>
+					{descVal}
+				</label>
+
 				<input type={"checkbox"} id={"addCharHidden"} defaultChecked={hiddenVal} />
+				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name?</label>
 
 				<button
+					className={"submit"}
 					id={"addCharSubmit"}
 					onClick={() => {
 						setFormSubmit(true);
@@ -465,6 +482,7 @@ export const SearchButton = () => {
 				}}
 			/>
 			<button
+				className={"submit"}
 				onClick={() => {
 					//const firstName = document.getElementById("firstName");
 					//const lastName = document.getElementById("lastName");

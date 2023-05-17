@@ -15,7 +15,7 @@ section {
     margin: auto;
 }
 
-input[type="text"], textarea {
+input[type="text"], textarea, button.submit {
     display:block;
     border-radius: 10px;
     font-size:125%;
@@ -23,12 +23,16 @@ input[type="text"], textarea {
     padding: 10px;
     margin: 20px;
 }
+input[type="checkbox"] {
+    margin: 20px;
+
+}
 textarea {
     width: 100%;
 }
 /* some of my labels are just there for accessibility
  * (I'm putting visible labels inside the inputs with js)
  */
-label .hidden {
+label.hidden {
     display: none;
 }
