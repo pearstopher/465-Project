@@ -276,10 +276,118 @@ export const AddChar = () => {
 		</div>
 	);
 };
+
 export const UpdateChar = (props) => {
+	const [updateCharInfo, setUpdateCharInfo] = useState([]);
+	const [formSubmit, setFormSubmit] = useState(false);
+	const [addCharMessage, setAddCharMessage] = useState(
+		"Success / error messages will appear here."
+	);
+
+	const formSubmitFn = () => {
+		const putUpdateCharInfo = async () => {
+			// request expects:
+			// const { id, fName, lName, desc, hidden } = req.body;
+			const postVars = {
+				id: props.id,
+				// fName: fName,
+				// lName: lName, //can't update name right now (your name shouldn't change!?)
+				desc: updateCharInfo.desc,
+				hidden: !updateCharInfo.hidden,
+			};
+			try {
+				const usersRes = await axios.put(`http://localhost:8080/character`, postVars);
+				console.log(usersRes.data);
+				setAddCharMessage(`Character updated successfully.`);
+				return usersRes.data;
+			} catch (e) {
+				setAddCharMessage(
+					`Error Creating Character. Error message: ${e.message}. Response: ${JSON.stringify(
+						postVars
+					)}`
+				);
+				console.log(e);
+				return e;
+			}
+		};
+
+		// this function is async and return is discarded
+		// can't do anything "after" it do it in the function above
+		// getNewCharInfo().then(setNewCharInfo);
+		putUpdateCharInfo();
+	};
+
+	useEffect(() => {
+		const getUpdateCharInfo = async () => {
+			try {
+				const usersRes = await axios.get(`http://localhost:8080/character/${props.id}`);
+				console.log(usersRes.data);
+				setAddCharMessage(`Character Information Received Successfully`);
+				return usersRes.data;
+			} catch (e) {
+				setAddCharMessage(`Error Creating Character. Error message: ${e.message}.`);
+				console.log(e);
+				return e;
+			}
+		};
+		getUpdateCharInfo().then(setUpdateCharInfo);
+	}, []);
+
 	return (
-		<div>
-			<p>Updating Character with ID {props.id}</p>
+		<div id={"updateCharWrap"}>
+			<h5>Enter your character information below:</h5>
+
+			<div id={"updateCharForm"}>
+				<input
+					type={"text"}
+					id={"updateCharFirstName"}
+					defaultValue={updateCharInfo.fName}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}
+				/>
+				<label htmlFor={"updateCharFirstName"} className={"hidden"}>
+					{updateCharInfo.fName}
+				</label>
+
+				<input
+					type={"text"}
+					id={"updateCharLastName"}
+					defaultValue={updateCharInfo.lName}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}
+				/>
+				<label htmlFor={"addCharLastName"} className={"hidden"}>
+					{updateCharInfo.lName}
+				</label>
+
+				<textarea id={"updateCharDesc"} defaultValue={updateCharInfo.desc} />
+				<label htmlFor={"addCharDesc"} className={"hidden"}>
+					{updateCharInfo.desc}
+				</label>
+
+				<input type={"checkbox"} id={"addCharHidden"} defaultChecked={!updateCharInfo.hidden} />
+				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name?</label>
+
+				<button
+					className={"submit"}
+					id={"addCharSubmit"}
+					onClick={() => {
+						setFormSubmit(true);
+						formSubmitFn();
+					}}
+				>
+					Update Character
+				</button>
+				<p id={"addCharInfo"}>{addCharMessage}</p>
+			</div>
 		</div>
 	);
 };
