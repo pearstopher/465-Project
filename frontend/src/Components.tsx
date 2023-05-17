@@ -341,7 +341,7 @@ export const UpdateChar = (props) => {
 			}
 		};
 		getUpdateCharInfo().then(setUpdateCharInfo);
-	}, [updateCharInfo]);
+	}, []);
 
 	return (
 		<div id={"updateCharWrap"}>
