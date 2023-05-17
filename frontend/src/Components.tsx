@@ -147,6 +147,12 @@ export function Image() {
 	return <img src={profile.imgUri} alt={"alt"} />;
 }
 
+export const Link = (props) => {
+	const id = props.id;
+	const name = props.name;
+	return <a href={`/character/${id}`}>{name}</a>;
+};
+
 // 1) Make a place to store the users list result
 // 2) Make the actual request to backend and store result
 // 3) Show the list of users formatted nicely in our webpage
@@ -357,10 +363,10 @@ export const FeaturedChars = (props) => {
 			<h4>Featured Characters:</h4>
 			{featuredChars ? (
 				<ul>
-					{featuredChars.map((char: { id: number; desc: string }) => (
+					{featuredChars.map((char: { id: number; fName: string; lName: string; desc: string }) => (
 						<li key={char.id}>
 							{" "}
-							{char.desc} - {char.id}{" "}
+							{char.desc} - {char.id} <Link id={char.id} name={`${char.fName} ${char.lName}`} />
 						</li>
 					))}
 				</ul>
