@@ -311,7 +311,7 @@ export const Character = () => {
 	}, [charId]);
 
 	return (
-		<div>
+		<section>
 			<h3>Character Info: </h3>
 			<h4>Name</h4>
 			<p>{charInfo.Character.Name}</p>
@@ -333,7 +333,7 @@ export const Character = () => {
 				// can look at the whole response if anything goes wrong
 				//<code>{JSON.stringify(charInfo)}</code>
 			}
-		</div>
+		</section>
 	);
 };
 
