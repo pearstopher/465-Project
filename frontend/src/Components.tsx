@@ -642,17 +642,22 @@ export const FeaturedChars = (props) => {
 	}, []);
 
 	return (
-		<div>
+		<div id={"featuredChars"}>
 			<h4>Featured Characters:</h4>
 			{featuredChars ? (
 				<ul>
-					{featuredChars.map((char: { id: number; fName: string; lName: string; desc: string }) => (
-						<li key={char.id}>
-							{" "}
-							{char.desc} - {char.id}
-							<Link id={char.id} name={`${char.fName} ${char.lName}`} />
-						</li>
-					))}
+					{featuredChars.map(
+						(char: { id: number; fName: string; lName: string; avatar: string }) => (
+							<li key={char.id}>
+								{" "}
+								<img
+									src={char.avatar ? char.avatar : avatar}
+									alt={"Avatar image of character's face."}
+								/>
+								<Link id={char.id} name={`${char.fName} ${char.lName}`} />
+							</li>
+						)
+					)}
 				</ul>
 			) : null}
 		</div>

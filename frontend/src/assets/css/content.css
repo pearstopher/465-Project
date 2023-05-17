@@ -1,38 +1,70 @@
 .App {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 /* flex: 1 makes the section take up the available space */
-main, section {
-    flex: 1;
+main,
+section {
+	flex: 1;
 }
 
 section {
-    max-width: 800px;
-    padding: 50px;
-    margin: auto;
+	max-width: 800px;
+	padding: 50px;
+	margin: auto;
 }
 
-input[type="text"], textarea, button.submit {
-    display:block;
-    border-radius: 10px;
-    font-size:125%;
-    border: 1px solid green;
-    padding: 10px;
-    margin: 20px;
+input[type="text"],
+textarea,
+button.submit {
+	display: block;
+	border-radius: 10px;
+	font-size: 125%;
+	border: 1px solid green;
+	padding: 10px;
+	margin: 20px;
 }
 input[type="checkbox"] {
-    margin: 20px;
-
+	margin: 20px;
 }
 textarea {
-    width: 100%;
+	width: 100%;
 }
 /* some of my labels are just there for accessibility
  * (I'm putting visible labels inside the inputs with js)
  */
 label.hidden {
-    display: none;
+	display: none;
+}
+
+/*
+featured characters (on the home page rn)
+ */
+
+#featuredChars ul {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#featuredChars li {
+	margin: 20px;
+	padding: 5px;
+	height: 100px;
+	background-color: LightGreen;
+	border-radius: 55px;
+	border: 2px solid green;
+
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+}
+#featuredChars li img {
+	border-radius: 50%;
+	border: 2px solid green;
+}
+#featuredChars li a {
+	color: green;
+	padding: 20px 10px 0px 10px;
+	font-size: 125%;
 }
