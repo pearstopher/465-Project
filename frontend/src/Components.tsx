@@ -137,7 +137,7 @@ export const AddChar = () => {
 				fName: fName,
 				lName: lName,
 				desc: desc,
-				hidden: hidden,
+				hidden: !hidden, //whoops this is backwards
 			};
 			try {
 				const usersRes = await axios.post(`http://localhost:8080/character`, postVars);
@@ -610,14 +610,18 @@ export const CharSearch = (props) => {
 	}, [props.fName, props.lName]);
 
 	return (
-		<div>
+		<div id={"searchResults"}>
 			<h4>Characters:</h4>
 			{chars ? (
 				<ul>
-					{chars.map((char: { id: number; fName: string; lName: string; desc: string }) => (
+					{chars.map((char: { id: number; fName: string; lName: string; avatar: string }) => (
 						<li key={char.id}>
-							{" "}
-							{char.desc} - {char.id} <Link id={char.id} name={`${char.fName} ${char.lName}`} />
+							<img
+								src={char.avatar ? char.avatar : avatar}
+								alt={"Avatar image of character's face."}
+							/>
+							<Link id={char.id} name={`${char.fName} ${char.lName}`} />
+							<div id={"id"}>{`ID: ${char.id}`}</div>
 						</li>
 					))}
 				</ul>
@@ -655,6 +659,7 @@ export const FeaturedChars = (props) => {
 									alt={"Avatar image of character's face."}
 								/>
 								<Link id={char.id} name={`${char.fName} ${char.lName}`} />
+								<div id={"id"}>{`ID: ${char.id}`}</div>
 							</li>
 						)
 					)}
