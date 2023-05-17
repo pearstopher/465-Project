@@ -278,7 +278,17 @@ export const AddChar = () => {
 };
 
 export const UpdateChar = (props) => {
-	const [updateCharInfo, setUpdateCharInfo] = useState([]);
+	const tempChar: Char = {
+		id: 0,
+		created_at: new Date(),
+		updated_at: new Date(),
+		fName: "First",
+		lName: "Last",
+		desc: "Description",
+		hidden: true,
+		featured: false,
+	};
+	const [updateCharInfo, setUpdateCharInfo] = useState(tempChar);
 	const [formSubmit, setFormSubmit] = useState(false);
 	const [addCharMessage, setAddCharMessage] = useState(
 		"Success / error messages will appear here."
@@ -320,7 +330,7 @@ export const UpdateChar = (props) => {
 	useEffect(() => {
 		const getUpdateCharInfo = async () => {
 			try {
-				const usersRes = await axios.get(`http://localhost:8080/character/${props.id}`);
+				const usersRes = await axios.get<Char>(`http://localhost:8080/character/${props.id}`);
 				console.log(usersRes.data);
 				setAddCharMessage(`Character Information Received Successfully`);
 				return usersRes.data;
@@ -331,7 +341,7 @@ export const UpdateChar = (props) => {
 			}
 		};
 		getUpdateCharInfo().then(setUpdateCharInfo);
-	}, []);
+	}, [updateCharInfo]);
 
 	return (
 		<div id={"updateCharWrap"}>
