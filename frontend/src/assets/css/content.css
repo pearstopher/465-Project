@@ -8,3 +8,9 @@
 main, section {
     flex: 1;
 }
+
+section {
+    max-width: 800px;
+    padding: 50px;
+    margin: auto;
+}
