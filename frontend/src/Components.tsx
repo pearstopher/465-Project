@@ -87,8 +87,11 @@ export const AddChar = () => {
 	};
 
 	const addFirst = (e) => {
-		let val = e.target.value;
-		const defaultVal = e.target.defaultValue;
+		// get the default values with an exception for the checkbox (true/false but still has a DUMB value of "on")
+		console.log(e.target.type);
+		let val = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+		const defaultVal =
+			e.target.type === "checkbox" ? e.target.defaultChecked : e.target.defaultValue;
 		if (val === "") {
 			val = defaultVal;
 			e.target.value = defaultVal;
@@ -250,9 +253,6 @@ export const AddChar = () => {
 					type={"checkbox"}
 					id={"addCharHidden"}
 					defaultChecked={hiddenVal}
-					onClick={(e) => {
-						clearFirst(e);
-					}}
 					onChange={(e) => {
 						addFirst(e);
 					}}
