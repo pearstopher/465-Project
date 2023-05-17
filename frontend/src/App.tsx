@@ -64,7 +64,7 @@ export function App() {
 						<Route path="/match" element={<Match />} />
 						<Route path="/character/:idParam" element={<Character />} />
 						<Route path="/randomProfile" element={<RandomProfile />} />
-						<Route path="/search/:fullNameWithDash" element={<NameSearch />} />
+						<Route path="/search/:fullNameWithDash?" element={<NameSearch />} />
 					</Routes>
 				</main>
 				<footer>Copyright 2023 Pears' Character Profiles</footer>

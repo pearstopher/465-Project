@@ -93,6 +93,9 @@ export const NameSearch = () => {
 	const extractName = (
 		fullNameWithDash
 	): { firstName: string; lastName: string; fullName: string } => {
+		if (!fullNameWithDash) {
+			return { firstName: "", lastName: "", fullName: "" };
+		}
 		// extract the name from the url
 		const fullNameArr = fullNameWithDash.split("-");
 
