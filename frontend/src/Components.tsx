@@ -74,8 +74,14 @@ export const AddChar = () => {
 			e.target.value = "";
 			if (defaultVal === firstVal) {
 				setFName(defaultVal);
-			} else {
+			} else if (defaultVal === lastVal) {
 				setLName(defaultVal);
+			} else if (defaultVal === idVal) {
+				setId(defaultVal);
+			} else if (defaultVal === descVal) {
+				setDesc(defaultVal);
+			} else if (defaultVal === hiddenVal) {
+				setHidden(defaultVal);
 			}
 		}
 	};
@@ -88,7 +94,13 @@ export const AddChar = () => {
 			e.target.value = defaultVal;
 			e.target.setSelectionRange(0, 0);
 		}
-		if (fName === defaultVal || lName === defaultVal) {
+		if (
+			fName === defaultVal ||
+			lName === defaultVal ||
+			id === defaultVal ||
+			desc === defaultVal ||
+			hidden === defaultVal
+		) {
 			if (e.target.selectionStart === 1) {
 				val = val.substring(0, 1);
 				e.target.value = val;
@@ -96,9 +108,15 @@ export const AddChar = () => {
 		}
 
 		if (defaultVal === firstVal) {
-			setFName(val);
-		} else {
-			setLName(val);
+			setFName(defaultVal);
+		} else if (defaultVal === lastVal) {
+			setLName(defaultVal);
+		} else if (defaultVal === idVal) {
+			setId(defaultVal);
+		} else if (defaultVal === descVal) {
+			setDesc(defaultVal);
+		} else if (defaultVal === hiddenVal) {
+			setHidden(defaultVal);
 		}
 	};
 
@@ -106,16 +124,28 @@ export const AddChar = () => {
 
 	const formSubmitFn = () => {
 		const getNewCharInfo = async () => {
-			//fName, lName, form values available here
+			// request expects:
+			// const { id, fName, lName, desc, hidden } = req.body;
+			const postVars = {
+				id: id,
+				fName: fName,
+				lName: lName,
+				desc: desc,
+				hidden: hidden,
+			};
 			try {
-				const usersRes = await axios.post(`http://localhost:8080/character`);
+				const usersRes = await axios.post(`http://localhost:8080/character`, postVars);
 				console.log(usersRes.data);
-				setAddCharMessage("Character created successfully.");
+				setAddCharMessage(`Character created successfully.`);
 				//could navigate to the next page on success, but I don't know what the routes will be with auth
 				//navigate("/myProfile");
 				return usersRes.data; // why are we returning stuff just do discard it tho?
 			} catch (e) {
-				setAddCharMessage(`Error Creating Character. ${e.message}.`);
+				setAddCharMessage(
+					`Error Creating Character. Error message: ${e.message}. Response: ${JSON.stringify(
+						postVars
+					)}`
+				);
 				console.log(e);
 				return e;
 			}
@@ -215,7 +245,17 @@ export const AddChar = () => {
 					{descVal}
 				</label>
 
-				<input type={"checkbox"} id={"addCharHidden"} defaultChecked={hiddenVal} />
+				<input
+					type={"checkbox"}
+					id={"addCharHidden"}
+					defaultChecked={hiddenVal}
+					onClick={(e) => {
+						clearFirst(e);
+					}}
+					onChange={(e) => {
+						addFirst(e);
+					}}
+				/>
 				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name?</label>
 
 				<button
