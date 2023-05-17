@@ -35,6 +35,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 					lName: lLower,
 					desc,
 					hidden,
+					featured: false, // this probably shouldn't be required
 				});
 
 				await req.em.flush();
