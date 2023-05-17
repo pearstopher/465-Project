@@ -3,6 +3,8 @@ import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
 import { useParams, useNavigate } from "react-router-dom";
 import { CharacterResponse } from "@/PCPTypes.ts";
+import avatar from "@images/avatar.jpg";
+import portrait from "@images/portrait.jpg";
 
 export const Match = () => {
 	return <div>"MATCH PAGE"</div>;
@@ -167,7 +169,7 @@ export const AddChar = () => {
 			<div id={"addCharForm"}>
 				<input
 					type={"text"}
-					id={"addCharLirstName"}
+					id={"addCharFirstName"}
 					defaultValue={firstVal}
 					onClick={(e) => {
 						clearFirst(e);
@@ -292,11 +294,11 @@ export const Character = () => {
 	const [charId, setCharId] = useState(id);
 	const temp: CharacterResponse = {
 		Character: {
-			Name: "No Name",
+			Name: "No Character",
 			Nameday: "No Nameday",
 			Bio: "No Bio",
-			Portrait: "default image",
-			Avatar: "default image",
+			Portrait: portrait,
+			Avatar: avatar,
 		},
 	};
 	const [charInfo, setCharInfo] = useState(temp);
