@@ -32,6 +32,40 @@ export const RandomProfile = () => {
 	);
 };
 
+export const MyProfile = () => {
+	return (
+		<section>
+			<h3>My Character Profile</h3>
+
+			<h4>Create New Character</h4>
+			<AddChar />
+
+			<h4>Update Character</h4>
+			<UpdateChar id={45151669} />
+		</section>
+	);
+};
+
+export const AddChar = () => {
+	return (
+		<div>
+			<p>Enter your character information below:</p>
+			<h5>First Name</h5>
+			<input />
+			<h5>Last Name</h5>
+			<input />
+			<p>etc</p>
+		</div>
+	);
+};
+export const UpdateChar = (props) => {
+	return (
+		<div>
+			<p>Updating Character with ID {props.id}</p>
+		</div>
+	);
+};
+
 export const Character = () => {
 	const { idParam } = useParams();
 	let id = parseInt(idParam);
