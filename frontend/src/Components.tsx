@@ -267,7 +267,7 @@ export const AddChar = () => {
 						formSubmitFn();
 					}}
 				>
-					Search
+					Create Character
 				</button>
 				<p id={"addCharInfo"}>{addCharMessage}</p>
 			</div>
