@@ -8,6 +8,8 @@ import {
 	NameSearch,
 	CharSearch,
 	Character,
+	Title,
+	Subtitle,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
@@ -29,8 +31,8 @@ export function App() {
 						<div className="logo">
 							<img src={logo} alt="Pears' Character Profiles Logo" />
 						</div>
-						<h1>Pears' Character Profiles</h1>
-						<h2>H2</h2>
+						<Title />
+						<Subtitle />
 					</div>
 					<nav>
 						<menu className="topmenu">
