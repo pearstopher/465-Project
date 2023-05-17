@@ -131,7 +131,7 @@ export const AddChar = () => {
 			// request expects:
 			// const { id, fName, lName, desc, hidden } = req.body;
 			const postVars = {
-				id: id,
+				id: parseInt(id),
 				fName: fName,
 				lName: lName,
 				desc: desc,
