@@ -54,6 +54,9 @@ export const AddChar = () => {
 	const [clicks, setClicks] = useState(0);
 	const [newCharInfo, setNewCharInfo] = useState([]);
 	const [formSubmit, setFormSubmit] = useState(false);
+	const [addCharMessage, setAddCharMessage] = useState(
+		"Success / error messages will appear here."
+	);
 
 	const navigate = useNavigate();
 
@@ -102,14 +105,12 @@ export const AddChar = () => {
 				const usersRes = await axios.post(`http://localhost:8080/character/`);
 				return usersRes.data;
 			} catch (e) {
+				setAddCharMessage(`Error Creating Character. ${e.message}.`);
 				console.log(e);
-				return (
-					<div className={"error"}>
-						<p>Character creation response error.</p>
-					</div>
-				);
+				return;
 			}
 		};
+		setAddCharMessage("Character added successfully.");
 
 		getNewCharInfo().then(setNewCharInfo);
 	};
@@ -160,6 +161,7 @@ export const AddChar = () => {
 				>
 					Search
 				</button>
+				<p id={"addCharInfo"}>{addCharMessage}</p>
 			</div>
 		</div>
 	);
