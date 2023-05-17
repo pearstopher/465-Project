@@ -132,6 +132,7 @@ export const AddChar = () => {
 
 			<div id={"addCharForm"}>
 				<input
+					type={"text"}
 					id={"addCharLirstName"}
 					defaultValue={firstVal}
 					onClick={(e) => {
@@ -148,6 +149,7 @@ export const AddChar = () => {
 					}}
 				/>
 				<input
+					type={"text"}
 					id={"addCharLastName"}
 					defaultValue={lastVal}
 					onClick={(e) => {
@@ -164,6 +166,7 @@ export const AddChar = () => {
 					}}
 				/>
 				<input
+					type={"text"}
 					id={"addCharID"}
 					defaultValue={idVal}
 					onClick={(e) => {
@@ -428,6 +431,7 @@ export const SearchButton = () => {
 		<div id={"searchForm"}>
 			<h4>Character Search</h4>
 			<input
+				type={"text"}
 				id={"firstName"}
 				defaultValue={firstVal}
 				onClick={(e) => {
@@ -444,6 +448,7 @@ export const SearchButton = () => {
 				}}
 			/>
 			<input
+				type={"text"}
 				id={"lastName"}
 				defaultValue={lastVal}
 				onClick={(e) => {

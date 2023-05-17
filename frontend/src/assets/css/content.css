@@ -14,3 +14,21 @@ section {
     padding: 50px;
     margin: auto;
 }
+
+input[type="text"], textarea {
+    display:block;
+    border-radius: 10px;
+    font-size:125%;
+    border: 1px solid green;
+    padding: 10px;
+    margin: 20px;
+}
+textarea {
+    width: 100%;
+}
+/* some of my labels are just there for accessibility
+ * (I'm putting visible labels inside the inputs with js)
+ */
+label .hidden {
+    display: none;
+}
