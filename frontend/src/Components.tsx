@@ -47,14 +47,120 @@ export const MyProfile = () => {
 };
 
 export const AddChar = () => {
+	const firstVal = "First";
+	const lastVal = "Last";
+	const [fName, setFName] = useState(firstVal);
+	const [lName, setLName] = useState(lastVal);
+	const [clicks, setClicks] = useState(0);
+	const [newCharInfo, setNewCharInfo] = useState([]);
+	const [formSubmit, setFormSubmit] = useState(false);
+
+	const navigate = useNavigate();
+
+	const clearFirst = (e) => {
+		const val = e.target.value;
+		const defaultVal = e.target.defaultValue;
+		if (val === defaultVal) {
+			e.target.value = "";
+			if (defaultVal === firstVal) {
+				setFName(defaultVal);
+			} else {
+				setLName(defaultVal);
+			}
+		}
+	};
+
+	const addFirst = (e) => {
+		let val = e.target.value;
+		const defaultVal = e.target.defaultValue;
+		if (val === "") {
+			val = defaultVal;
+			e.target.value = defaultVal;
+			e.target.setSelectionRange(0, 0);
+		}
+		if (fName === defaultVal || lName === defaultVal) {
+			if (e.target.selectionStart === 1) {
+				val = val.substring(0, 1);
+				e.target.value = val;
+			}
+		}
+
+		if (defaultVal === firstVal) {
+			setFName(val);
+		} else {
+			setLName(val);
+		}
+	};
+
+	useEffect(() => {}, [formSubmit]);
+
+	const formSubmitFn = () => {
+		const getNewCharInfo = async () => {
+			console.log(fName);
+			console.log(lName);
+			try {
+				const usersRes = await axios.post(`http://localhost:8080/character/`);
+				return usersRes.data;
+			} catch (e) {
+				console.log(e);
+				return (
+					<div className={"error"}>
+						<p>Character creation response error.</p>
+					</div>
+				);
+			}
+		};
+
+		getNewCharInfo().then(setNewCharInfo);
+	};
+
 	return (
-		<div>
-			<p>Enter your character information below:</p>
-			<h5>First Name</h5>
-			<input />
-			<h5>Last Name</h5>
-			<input />
-			<p>etc</p>
+		<div id={"addCharWrap"}>
+			<h5>Enter your character information below:</h5>
+
+			<div id={"addCharForm"}>
+				<input
+					id={"addCharLirstName"}
+					defaultValue={firstVal}
+					onClick={(e) => {
+						clearFirst(e);
+					}}
+					onChange={(e) => {
+						addFirst(e);
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}
+				/>
+				<input
+					id={"addCharLastName"}
+					defaultValue={lastVal}
+					onClick={(e) => {
+						clearFirst(e);
+					}}
+					onChange={(e) => {
+						addFirst(e);
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							setFormSubmit(true);
+							formSubmitFn();
+						}
+					}}
+				/>
+				<button
+					id={"addCharSubmit"}
+					onClick={() => {
+						setFormSubmit(true);
+						formSubmitFn();
+					}}
+				>
+					Search
+				</button>
+			</div>
 		</div>
 	);
 };
