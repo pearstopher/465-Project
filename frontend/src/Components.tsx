@@ -44,6 +44,7 @@ export const Character = () => {
 		Character: {
 			Name: "No Name",
 			Nameday: "No Nameday",
+			Bio: "No Bio",
 			Portrait: "default image",
 			Avatar: "default image",
 		},
@@ -66,6 +67,8 @@ export const Character = () => {
 			<p>{charInfo.Character.Name}</p>
 			<h4>Birthday</h4>
 			<p>{charInfo.Character.Nameday}</p>
+			<h4>Bio</h4>
+			<p>{charInfo.Character.Bio}</p>
 			<h4>Portrait</h4>
 			<img
 				src={charInfo.Character.Portrait}

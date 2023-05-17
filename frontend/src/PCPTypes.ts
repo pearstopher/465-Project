@@ -17,6 +17,7 @@ export type CharacterResponse = {
 	Character: {
 		Name: string;
 		Nameday: string;
+		Bio: string;
 		Portrait: string;
 		Avatar: string;
 	};
