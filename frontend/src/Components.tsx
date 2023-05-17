@@ -99,19 +99,22 @@ export const AddChar = () => {
 
 	const formSubmitFn = () => {
 		const getNewCharInfo = async () => {
-			console.log(fName);
-			console.log(lName);
+			//fName, lName, form values available here
 			try {
-				const usersRes = await axios.post(`http://localhost:8080/character/`);
-				return usersRes.data;
+				const usersRes = await axios.post(`http://localhost:8080/character`);
+				console.log(usersRes.data);
+				setAddCharMessage("Character created successfully.");
+				//could navigate to the next page on success, but I don't know what the routes will be with auth
+				//navigate("/myProfile");
+				return usersRes.data; // why are we returning stuff just do discard it tho?
 			} catch (e) {
 				setAddCharMessage(`Error Creating Character. ${e.message}.`);
 				console.log(e);
-				return;
 			}
 		};
-		setAddCharMessage("Character added successfully.");
 
+		// this function is async and return is discarded
+		// can't do anything "after" it do it in the function above
 		getNewCharInfo().then(setNewCharInfo);
 	};
 
