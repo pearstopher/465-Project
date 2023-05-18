@@ -79,6 +79,15 @@
           "primary": false,
           "nullable": false,
           "mappedType": "boolean"
+        },
+        "avatar": {
+          "name": "avatar",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "string"
         }
       },
       "name": "characters",

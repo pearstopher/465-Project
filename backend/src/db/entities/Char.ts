@@ -19,4 +19,7 @@ export class Char extends BaseEntity {
 
 	@Property()
 	featured!: boolean;
+
+	@Property({ nullable: true })
+	avatar?: string;
 }
