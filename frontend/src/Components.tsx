@@ -288,9 +288,12 @@ export const UpdateChar = (props) => {
 		hidden: true,
 		featured: false,
 	};
-	const [updateCharInfo, setUpdateCharInfo] = useState(tempChar);
+	const [updateCharInfo, setUpdateCharInfo] = useState([]);
+	const [updateCharDesc, setUpdateCharDesc] = useState("");
+	const [updateCharHidden, setUpdateCharHidden] = useState(true); //negated later
+	// won't update as tempchar even though ti does in Character function. I can't explain it so I just take the errors for now
 	const [formSubmit, setFormSubmit] = useState(false);
-	const [addCharMessage, setAddCharMessage] = useState(
+	const [updateCharMessage, setUpdateCharMessage] = useState(
 		"Success / error messages will appear here."
 	);
 
@@ -302,16 +305,16 @@ export const UpdateChar = (props) => {
 				id: props.id,
 				// fName: fName,
 				// lName: lName, //can't update name right now (your name shouldn't change!?)
-				desc: updateCharInfo.desc,
-				hidden: !updateCharInfo.hidden,
+				desc: updateCharDesc,
+				hidden: !updateCharHidden,
 			};
 			try {
 				const usersRes = await axios.put(`http://localhost:8080/character`, postVars);
 				console.log(usersRes.data);
-				setAddCharMessage(`Character updated successfully.`);
+				setUpdateCharMessage(`Character updated successfully.`);
 				return usersRes.data;
 			} catch (e) {
-				setAddCharMessage(
+				setUpdateCharMessage(
 					`Error Creating Character. Error message: ${e.message}. Response: ${JSON.stringify(
 						postVars
 					)}`
@@ -332,18 +335,17 @@ export const UpdateChar = (props) => {
 			try {
 				const usersRes = await axios.get<Char>(`http://localhost:8080/character/${props.id}`);
 				console.log(usersRes.data);
-				setAddCharMessage(`Character Information Received Successfully`);
+				setUpdateCharDesc(usersRes.data.desc);
+				setUpdateCharHidden(usersRes.data.hidden);
+				setUpdateCharMessage(`Character Information Received Successfully`);
 				return usersRes.data;
 			} catch (e) {
-				setAddCharMessage(`Error Creating Character. Error message: ${e.message}.`);
+				setUpdateCharMessage(`Error Creating Character. Error message: ${e.message}.`);
 				console.log(e);
 				return e;
 			}
 		};
-		getUpdateCharInfo().then(function () {
-			setUpdateCharInfo(updateCharInfo);
-			console.log(updateCharInfo);
-		});
+		getUpdateCharInfo().then(setUpdateCharInfo);
 	}, []);
 
 	return (
@@ -377,21 +379,34 @@ export const UpdateChar = (props) => {
 						}
 					}}
 				/>
-				<label htmlFor={"addCharLastName"} className={"hidden"}>
+				<label htmlFor={"updateCharLastName"} className={"hidden"}>
 					{updateCharInfo.lName}
 				</label>
 
-				<textarea id={"updateCharDesc"} defaultValue={updateCharInfo.desc} />
+				<textarea
+					id={"updateCharDesc"}
+					defaultValue={updateCharDesc}
+					onChange={(e) => {
+						setUpdateCharDesc(e.target.value);
+					}}
+				/>
 				<label htmlFor={"addCharDesc"} className={"hidden"}>
 					{updateCharInfo.desc}
 				</label>
 
-				<input type={"checkbox"} id={"addCharHidden"} defaultChecked={!updateCharInfo.hidden} />
+				<input
+					type={"checkbox"}
+					id={"updateCharHidden"}
+					defaultChecked={!updateCharHidden}
+					onChange={(e) => {
+						setUpdateCharHidden(e.target.checked);
+					}}
+				/>
 				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name?</label>
 
 				<button
 					className={"submit"}
-					id={"addCharSubmit"}
+					id={"updateCharSubmit"}
 					onClick={() => {
 						setFormSubmit(true);
 						formSubmitFn();
@@ -399,7 +414,7 @@ export const UpdateChar = (props) => {
 				>
 					Update Character
 				</button>
-				<p id={"addCharInfo"}>{addCharMessage}</p>
+				<p id={"updateCharInfo"}>{updateCharMessage}</p>
 			</div>
 		</div>
 	);
@@ -424,8 +439,8 @@ export const Character = () => {
 	};
 	const tempChar: Char = {
 		id: 0,
-		created_at: new Date(),
-		updated_at: new Date(),
+		created_at: "",
+		updated_at: "",
 		fName: "First",
 		lName: "Last",
 		desc: "Description",
