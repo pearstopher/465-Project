@@ -38,5 +38,15 @@ export class CharSeeder extends Seeder {
 			hidden: true,
 			featured: false,
 		});
+
+		em.create(Char, {
+			id: 43596225,
+			fName: "miss",
+			lName: "hakuri",
+			hidden: false,
+			featured: true,
+			avatar:
+				"https://img2.finalfantasyxiv.com/f/641d0a0ddfdc1d3da7aaa91ce9b1e055_fce4949e615393e574f2d57134b31fc1fc0_96x96.jpg?1684363681",
+		});
 	}
 }
