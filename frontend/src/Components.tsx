@@ -280,8 +280,8 @@ export const AddChar = () => {
 export const UpdateChar = (props) => {
 	const tempChar: Char = {
 		id: 0,
-		created_at: new Date(),
-		updated_at: new Date(),
+		created_at: "",
+		updated_at: "",
 		fName: "First",
 		lName: "Last",
 		desc: "Description",
@@ -340,7 +340,10 @@ export const UpdateChar = (props) => {
 				return e;
 			}
 		};
-		getUpdateCharInfo().then(setUpdateCharInfo);
+		getUpdateCharInfo().then(function () {
+			setUpdateCharInfo(updateCharInfo);
+			console.log(updateCharInfo);
+		});
 	}, []);
 
 	return (

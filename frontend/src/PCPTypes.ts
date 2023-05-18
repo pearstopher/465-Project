@@ -14,8 +14,8 @@ export type ProfileType = {
 //character response from my api
 export type Char = {
 	id: number;
-	created_at: Date;
-	updated_at: Date;
+	created_at: string;
+	updated_at: string;
 	fName: string;
 	lName: string;
 	desc: string;
