@@ -11,6 +11,7 @@ import {
 	Title,
 	Subtitle,
 	MyProfile,
+	Callback,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
@@ -47,9 +48,9 @@ export function App() {
 							<li>
 								<Link
 									to={
-										"https://dev-lnl6xq2bi1qytw01.us.auth0.com/authorize?response_type=code&client_id=" +
+										"https://dev-lnl6xq2bi1qytw01.us.auth0.com/authorize?response_type=token&client_id=" +
 										"3b6XUUqEZ5izxZXoRSr4AWdWDR8X3XDB" +
-										"&redirect_uri=http://localhost:8080/callback"
+										"&redirect_uri=http://localhost:5173/callback"
 									}
 								>
 									Login
@@ -73,6 +74,7 @@ export function App() {
 						<Route path="/character/:idParam" element={<Character />} />
 						<Route path="/myProfile" element={<MyProfile />} />
 						<Route path="/search/:fullNameWithDash?" element={<NameSearch />} />
+						<Route path="/callback" element={<Callback />} />
 					</Routes>
 				</main>
 				<footer>Copyright 2023 Pears' Character Profiles</footer>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getRandomProfile } from "@/InitialState.ts";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Char, CharacterResponse } from "@/PCPTypes.ts";
 import avatar from "@images/avatar.jpg";
 import portrait from "@images/portrait.jpg";
@@ -22,6 +22,16 @@ export const Home = () => {
 			<SearchButton />
 
 			<FeaturedChars />
+		</section>
+	);
+};
+
+export const Callback = () => {
+	const { hash } = useLocation();
+
+	return (
+		<section>
+			<code> {JSON.stringifyyhash} </code>
 		</section>
 	);
 };
