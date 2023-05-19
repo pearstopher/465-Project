@@ -28,10 +28,11 @@ export const Home = () => {
 
 export const Callback = () => {
 	const { hash } = useLocation();
+	const token = hash.substring(hash.indexOf("#access_token=") + 14, hash.indexOf("&"));
 
 	return (
 		<section>
-			<code> {JSON.stringifyyhash} </code>
+			<code> {token} </code>
 		</section>
 	);
 };
