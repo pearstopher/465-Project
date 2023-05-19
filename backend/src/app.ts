@@ -12,6 +12,11 @@ await app.register(cors, {
 	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "SEARCH"],
 });
 
+await app.register(import("fastify-auth0-verify"), {
+	domain: process.env.AUTH_DOMAIN,
+	secret: process.env.AUTH_SECRET,
+});
+
 await app.register(FastifyMikroOrmPlugin, config);
 await app.register(FastifySearchHttpMethodPlugin);
 
