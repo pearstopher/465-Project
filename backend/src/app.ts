@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import Fastify from "fastify";
 import config from "./db/mikro-orm.config.js";
 import { FastifySearchHttpMethodPlugin } from "./plugins/http_search.js";
@@ -15,6 +17,14 @@ await app.register(cors, {
 await app.register(import("fastify-auth0-verify"), {
 	domain: process.env.AUTH_DOMAIN,
 	secret: process.env.AUTH_SECRET,
+});
+
+await app.addHook("onRequest", async (request, reply) => {
+	try {
+		await request.jwtVerify();
+	} catch (err) {
+		reply.send(err);
+	}
 });
 
 await app.register(FastifyMikroOrmPlugin, config);
