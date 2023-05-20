@@ -13,6 +13,9 @@ ReactDOM.createRoot(rootContainer).render(
 			clientId="3b6XUUqEZ5izxZXoRSr4AWdWDR8X3XDB"
 			authorizationParams={{
 				redirect_uri: window.location.origin + "/callback",
+				//audience: "https://dev-lnl6xq2bi1qytw01.us.auth0.com/api/v2/",
+				//audience: "http://localhost:8080",
+				//scope: "profile read:current_user update:current_user_metadata",
 			}}
 		>
 			<App />
