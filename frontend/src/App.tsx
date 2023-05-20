@@ -12,6 +12,9 @@ import {
 	Subtitle,
 	MyProfile,
 	Callback,
+	LoginButton,
+	LogoutButton,
+	SampleProfile,
 } from "@/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
@@ -46,15 +49,19 @@ export function App() {
 								<Link to="/myProfile">My Profile</Link>
 							</li>
 							<li>
-								<Link
-									to={
-										"https://dev-lnl6xq2bi1qytw01.us.auth0.com/authorize?response_type=token&client_id=" +
-										"3b6XUUqEZ5izxZXoRSr4AWdWDR8X3XDB" +
-										"&redirect_uri=http://localhost:5173/callback"
-									}
-								>
-									Login
-								</Link>
+								{/*<Link*/}
+								{/*	to={*/}
+								{/*		"https://dev-lnl6xq2bi1qytw01.us.auth0.com/authorize?response_type=token&client_id=" +*/}
+								{/*		"3b6XUUqEZ5izxZXoRSr4AWdWDR8X3XDB" +*/}
+								{/*		"&redirect_uri=http://localhost:5173/callback"*/}
+								{/*	}*/}
+								{/*>*/}
+								{/*	Login*/}
+								{/*</Link>*/}
+								<LoginButton />
+							</li>
+							<li>
+								<LogoutButton />
 							</li>
 							<li>
 								<Link to="/character/42934531">Example Profile</Link>
