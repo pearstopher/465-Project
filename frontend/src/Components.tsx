@@ -322,7 +322,11 @@ export const AddChar = () => {
 				hidden: !hidden, //whoops this is backwards
 			};
 			try {
-				const usersRes = await axios.post(`http://localhost:8080/character`, postVars);
+				const usersRes = await axios.post(`http://localhost:8080/character`, postVars, {
+					headers: {
+						Authorization: `Bearer ${getCookie("access_token")}`,
+					},
+				});
 				console.log(usersRes.data);
 				setAddCharMessage(`Character created successfully.`);
 				//could navigate to the next page on success, but I don't know what the routes will be with auth
