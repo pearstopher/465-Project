@@ -30,6 +30,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 
 			const fLower = fName.toLowerCase();
 			const lLower: string = lName.toLowerCase();
+			console.log(req.user.sub);
 
 			try {
 				const newChar = await req.em.create(Char, {
