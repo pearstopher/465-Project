@@ -137,11 +137,10 @@ export const Callback = () => {
 	const [userMetadata, setUserMetadata] = useState(null);
 	const [token, setToken] = useState("");
 	const [cookie, setCookie] = useCookies(["access_token"]);
+	const domain = "localhost:8080";
 
 	useEffect(() => {
 		const getToken = async () => {
-			const domain = "localhost:8080";
-
 			try {
 				//"getAccessTokenSilently"
 				// The documentation said to use this, but when I tried, I get a warning that it doesn't work
@@ -176,12 +175,28 @@ export const Callback = () => {
 
 	return (
 		<>
-			<section>
-				<code> {token} </code>
-			</section>
+			{/*<section>*/}
+			{/*	<code> {token} </code>*/}
+			{/*</section>*/}
 
+			{/*<section>*/}
+			{/*	<code> {getCookie("access_token")}</code>*/}
+			{/*</section>*/}
 			<section>
-				<code> {getCookie("access_token")}</code>
+				Welcome, {user?.nickname}! You have successfully logged in.
+				{domain.includes("localhost") ? (
+					<>
+						{" "}
+						<p>
+							<b>
+								We are on localhost, so please use the popup to complete getting the token.
+								Otherwise you won't be able to access the protected backend API. Make sure you see a
+								token below.
+							</b>
+						</p>
+						<p>{getCookie("access_token")}</p>
+					</>g
+				) : null}
 			</section>
 		</>
 	);
