@@ -35,6 +35,15 @@
           "length": 6,
           "mappedType": "datetime"
         },
+        "user": {
+          "name": "user",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
         "f_name": {
           "name": "f_name",
           "type": "varchar(255)",

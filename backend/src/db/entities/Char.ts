@@ -4,6 +4,9 @@ import { BaseEntity } from "./BaseEntity.js";
 @Entity({ tableName: "characters" })
 export class Char extends BaseEntity {
 	@Property()
+	user!: string;
+
+	@Property()
 	fName!: string;
 
 	@Property()
