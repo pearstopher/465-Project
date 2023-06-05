@@ -22,6 +22,9 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 	// C = Create Character
 	app.post<{ Body: { id: number; fName: string; lName: string; desc: string; hidden: boolean } }>(
 		"/character",
+		{
+			onRequest: [app.authenticate],
+		},
 		async (req, reply) => {
 			const { id, fName, lName, desc, hidden } = req.body;
 
