@@ -11,6 +11,7 @@ export class CharSeeder extends Seeder {
 			desc: "This is an (optional) character description.",
 			hidden: false,
 			featured: true,
+			user: "admin",
 		});
 
 		em.create(Char, {
@@ -20,6 +21,7 @@ export class CharSeeder extends Seeder {
 			desc: "This is an (optional) character description.",
 			hidden: false,
 			featured: true,
+			user: "admin",
 		});
 
 		em.create(Char, {
@@ -29,6 +31,7 @@ export class CharSeeder extends Seeder {
 			desc: "This is not my character, it's just somebody with the same name as one of my characters.",
 			hidden: false,
 			featured: false,
+			user: "admin",
 		});
 
 		em.create(Char, {
@@ -37,6 +40,7 @@ export class CharSeeder extends Seeder {
 			lName: "snow",
 			hidden: true,
 			featured: false,
+			user: "admin",
 		});
 
 		em.create(Char, {
@@ -47,6 +51,7 @@ export class CharSeeder extends Seeder {
 			featured: true,
 			avatar:
 				"https://img2.finalfantasyxiv.com/f/641d0a0ddfdc1d3da7aaa91ce9b1e055_fce4949e615393e574f2d57134b31fc1fc0_96x96.jpg?1684363681",
+			user: "admin",
 		});
 	}
 }
