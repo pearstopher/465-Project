@@ -5,10 +5,19 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Char, CharacterResponse } from "@/PCPTypes.ts";
 import avatar from "@images/avatar.jpg";
 import portrait from "@images/portrait.jpg";
+import { useCookies } from "react-cookie";
 
 // login and logout buttons
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+
+//borrowed this function to get the cookie I set
+// until I figure out where to put the useCookies to make it available everywhere
+// https://stackoverflow.com/questions/51109559/get-cookie-with-react
+function getCookie(key) {
+	const b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
+	return b ? b.pop() : "";
+}
 
 export const LoginButton = () => {
 	const { loginWithRedirect } = useAuth0();
@@ -72,13 +81,14 @@ export const SampleProfile = () => {
 
 				const { user_metadata } = await metadataResponse.json();
 
-				setUserMetadata(user_metadata);
+				//setUserMetadata(user_metadata);
+				return user_metadata;
 			} catch (e) {
 				console.log(e.message);
 			}
 		};
 
-		getUserMetadata();
+		//getUserMetadata().then(setUserMetadata);
 	}, [getAccessTokenSilently, user?.sub]);
 
 	return (
@@ -106,7 +116,6 @@ export const Match = () => {
 export const Home = () => {
 	return (
 		<section>
-			<SampleProfile />
 			<h3>Welcome</h3>
 			<p>
 				Welcome to Pears' Character Profiles. You can use this site to browse the characters I have
@@ -121,13 +130,61 @@ export const Home = () => {
 };
 
 export const Callback = () => {
-	const { hash } = useLocation();
-	const token = hash.substring(hash.indexOf("#access_token=") + 14, hash.indexOf("&"));
+	//const { hash } = useLocation();
+	//const token = hash.substring(hash.indexOf("#access_token=") + 14, hash.indexOf("&"));
+	const { user, isAuthenticated, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
+	const [userMetadata, setUserMetadata] = useState(null);
+	const [token, setToken] = useState("");
+	const [cookie, setCookie] = useCookies(["access_token"]);
+
+	useEffect(() => {
+		const getToken = async () => {
+			const domain = "localhost:8080";
+
+			try {
+				const accessToken = await getAccessTokenWithPopup({
+					authorizationParams: {
+						audience: `http://${domain}`,
+						scope: "read:current_user",
+					},
+				});
+				console.log(accessToken);
+				//this isn't important yet all I need is some date in the future
+				const expires = new Date();
+				expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); //a week
+				setCookie("access_token", accessToken, { path: "/", expires });
+				return accessToken;
+
+				//const userDetailsByIdUrl = `http://${domain}/api/v2/users/${user.sub}`;
+
+				// const metadataResponse = await fetch(userDetailsByIdUrl, {
+				// 	headers: {
+				// 		Authorization: `Bearer ${accessToken}`,
+				// 	},
+				// });
+				//
+				// const { user_metadata } = await metadataResponse.json();
+
+				//setUserMetadata(user_metadata);
+				//return user_metadata;
+			} catch (e) {
+				console.log(e.message);
+			}
+		};
+
+		getToken().then(setToken);
+	}, [getAccessTokenSilently, user?.sub]);
 
 	return (
-		<section>
-			<code> {token} </code>
-		</section>
+		<>
+			<section>
+				<code> {token} </code>
+			</section>
+
+			<section>
+				<code> {getCookie("access_token")}</code>
+			</section>
+		</>
 	);
 };
 
@@ -141,15 +198,21 @@ export const RandomProfile = () => {
 
 export const MyProfile = () => {
 	return (
-		<section>
-			<h3>My Character Profile</h3>
+		<>
+			<section>
+				<h3>My Info</h3>
+				<SampleProfile />
+			</section>
+			<section>
+				<h3>My Character Profile</h3>
 
-			<h4>Create New Character</h4>
-			<AddChar />
+				<h4>Create New Character</h4>
+				<AddChar />
 
-			<h4>Update Character</h4>
-			<UpdateChar id={45151669} />
-		</section>
+				<h4>Update Character</h4>
+				<UpdateChar id={45151669} />
+			</section>
+		</>
 	);
 };
 

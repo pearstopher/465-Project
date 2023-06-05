@@ -25,6 +25,7 @@ import "@css/header.css";
 import "@css/content.css";
 import "@css/footer.css";
 import logo from "@images/logo.png";
+import { useCookies } from "react-cookie";
 
 // This is our first React "Component"
 export function App() {
