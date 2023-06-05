@@ -14,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 //borrowed this function to get the cookie I set
 // until I figure out where to put the useCookies to make it available everywhere
 // https://stackoverflow.com/questions/51109559/get-cookie-with-react
+//
 function getCookie(key) {
 	const b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
 	return b ? b.pop() : "";
