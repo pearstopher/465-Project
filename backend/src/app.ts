@@ -19,13 +19,13 @@ await app.register(import("fastify-auth0-verify"), {
 	secret: process.env.AUTH_SECRET,
 });
 
-await app.addHook("onRequest", async (request, reply) => {
-	try {
-		await request.jwtVerify();
-	} catch (err) {
-		reply.send(err);
-	}
-});
+// await app.addHook("onRequest", async (request, reply) => {
+// 	try {
+// 		await request.jwtVerify();
+// 	} catch (err) {
+// 		reply.send(err);
+// 	}
+// });
 
 await app.register(FastifyMikroOrmPlugin, config);
 await app.register(FastifySearchHttpMethodPlugin);
