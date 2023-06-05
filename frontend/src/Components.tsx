@@ -195,7 +195,7 @@ export const Callback = () => {
 							</b>
 						</p>
 						<p>{getCookie("access_token")}</p>
-					</>g
+					</>
 				) : null}
 			</section>
 		</>
