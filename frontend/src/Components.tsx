@@ -143,6 +143,17 @@ export const Callback = () => {
 			const domain = "localhost:8080";
 
 			try {
+				//"getAccessTokenSilently"
+				// The documentation said to use this, but when I tried, I get a warning that it doesn't work
+				// when the domain is localhost. Since my domain is localhost, I had to replace it with this
+				// alternative function.
+				//
+				//"getAccessTokenWithPopup"
+				// This one works great! The only problem is there is an annoying popup. But once you deal with
+				// the popup you get the token and everything works great. So right now I am just using this on
+				// the callback page to get the token. If I were to move this to a real domain I assume that the
+				// silent function would work to get me the token just like the documentation says. Anyway, that's
+				// why the callback page has an annoying popup.
 				const accessToken = await getAccessTokenWithPopup({
 					authorizationParams: {
 						audience: `http://${domain}`,
@@ -155,19 +166,6 @@ export const Callback = () => {
 				expires.setTime(expires.getTime() + 7 * 24 * 60 * 60 * 1000); //a week
 				setCookie("access_token", accessToken, { path: "/", expires });
 				return accessToken;
-
-				//const userDetailsByIdUrl = `http://${domain}/api/v2/users/${user.sub}`;
-
-				// const metadataResponse = await fetch(userDetailsByIdUrl, {
-				// 	headers: {
-				// 		Authorization: `Bearer ${accessToken}`,
-				// 	},
-				// });
-				//
-				// const { user_metadata } = await metadataResponse.json();
-
-				//setUserMetadata(user_metadata);
-				//return user_metadata;
 			} catch (e) {
 				console.log(e.message);
 			}
