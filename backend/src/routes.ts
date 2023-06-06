@@ -32,9 +32,9 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 				console.log(currentChar);
 				if (currentChar) {
 					//need to finish setting up multiple characters
-					return reply.send({ message: true });
+					return reply.send({ exists: true });
 				} else {
-					return reply.send({ message: false });
+					return reply.send({ exists: false });
 				}
 			} catch (err) {
 				console.log("Error checking for character.", err.message);

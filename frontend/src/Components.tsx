@@ -233,6 +233,37 @@ export const MyProfile = () => {
 	);
 };
 
+export const HasChar = () => {
+	const [hasChar, setHasChar] = useState(true); //negated later
+	const [hasCharMessage, setHasCharMessage] = useState("Checking if you have a character...");
+
+	useEffect(() => {
+		const getHasChar = async () => {
+			try {
+				const charRes = await axios.get(`http://localhost:8080/hasCharacter`, {
+					headers: {
+						Authorization: `Bearer ${getCookie("access_token")}`,
+					},
+				});
+				console.log(charRes.data);
+				if (charRes.data.exists) {
+					setHasCharMessage(`You have a character.`);
+				} else {
+					setHasCharMessage(`You do not have a character.`);
+				}
+				return charRes.data;
+			} catch (e) {
+				setHasCharMessage(`Error determining if character exists. Error message: ${e.message}.`);
+				console.log(e);
+				return e;
+			}
+		};
+		getHasChar().then(setHasChar);
+	}, []);
+
+	return <div>{hasCharMessage}</div>;
+};
+
 export const AddChar = () => {
 	const firstVal = "First Name";
 	const lastVal = "Last Name";
