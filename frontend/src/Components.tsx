@@ -221,20 +221,14 @@ export const MyProfile = () => {
 				<h3>My Character Profile</h3>
 
 				<h3>Do I have a character?</h3>
-				<HasChar />
-
-				<h4>Create New Character</h4>
-				<AddChar />
-
-				<h4>Update Character</h4>
-				<UpdateChar id={45151669} />
+				<CreateOrUpdateChar />
 			</section>
 		</>
 	);
 };
 
-export const HasChar = () => {
-	const [hasChar, setHasChar] = useState(true); //negated later
+export const CreateOrUpdateChar = () => {
+	const [hasChar, setHasChar] = useState(true);
 	const [hasCharMessage, setHasCharMessage] = useState("Checking if you have a character...");
 
 	useEffect(() => {
@@ -251,7 +245,7 @@ export const HasChar = () => {
 				} else {
 					setHasCharMessage(`You do not have a character.`);
 				}
-				return charRes.data;
+				return charRes.data.exists; //the call returns exists: true or exists: false
 			} catch (e) {
 				setHasCharMessage(`Error determining if character exists. Error message: ${e.message}.`);
 				console.log(e);
@@ -261,7 +255,23 @@ export const HasChar = () => {
 		getHasChar().then(setHasChar);
 	}, []);
 
-	return <div>{hasCharMessage}</div>;
+	return (
+		<>
+			<div>{hasCharMessage}</div>
+			{hasChar ? (
+				<>
+					<h4>Update Character</h4>
+					<UpdateChar id={45151669} />
+				</>
+			) : (
+				<>
+					<h4>Create New Character</h4>
+					<AddChar />
+				</>
+			)}
+			<div>{hasCharMessage}</div>
+		</>
+	);
 };
 
 export const AddChar = () => {
