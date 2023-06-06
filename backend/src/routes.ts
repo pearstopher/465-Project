@@ -32,25 +32,12 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 				console.log(currentChar);
 				if (currentChar) {
 					//need to finish setting up multiple characters
-					return reply.send({ message: "1" });
+					return reply.send({ message: true });
+				} else {
+					return reply.send({ message: false });
 				}
-
-				const newChar = await req.em.create(Char, {
-					id,
-					fName: fLower,
-					lName: lLower,
-					desc,
-					hidden,
-					featured: false, // this probably shouldn't be required
-					user: req.user.sub,
-				});
-
-				await req.em.flush();
-
-				console.log("Created new character:", newChar);
-				return reply.send(newChar);
 			} catch (err) {
-				console.log("Failed to create new user", err.message);
+				console.log("Error checking for character.", err.message);
 				return reply.status(500).send({ message: err.message });
 			}
 		}

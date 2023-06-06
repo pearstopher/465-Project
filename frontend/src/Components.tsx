@@ -220,6 +220,9 @@ export const MyProfile = () => {
 			<section>
 				<h3>My Character Profile</h3>
 
+				<h3>Do I have a character?</h3>
+				<HasChar />
+
 				<h4>Create New Character</h4>
 				<AddChar />
 
