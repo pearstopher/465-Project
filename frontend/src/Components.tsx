@@ -334,10 +334,11 @@ export const AddChar = () => {
 				return usersRes.data; // why are we returning stuff just do discard it tho?
 			} catch (e) {
 				setAddCharMessage(
-					`Error Creating Character. Error message: ${e.message}. Response: ${JSON.stringify(
-						postVars
-					)}`
+					`Error Creating Character. Error message: ${e.message}. Response: ${e.response.data.message}`
 				);
+				//${JSON.stringify(
+				// 						postVars
+				// 					)}
 				console.log(e);
 				return e;
 			}

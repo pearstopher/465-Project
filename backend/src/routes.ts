@@ -19,6 +19,43 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		return "Welcome to Pears' Character Profiles";
 	});
 
+	// Has Character
+	// Does authenticated user have a character or not?
+	app.get(
+		"/hasCharacter",
+		{
+			onRequest: [app.authenticate],
+		},
+		async (req, reply) => {
+			try {
+				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
+				console.log(currentChar);
+				if (currentChar) {
+					//need to finish setting up multiple characters
+					return reply.send({ message: "1" });
+				}
+
+				const newChar = await req.em.create(Char, {
+					id,
+					fName: fLower,
+					lName: lLower,
+					desc,
+					hidden,
+					featured: false, // this probably shouldn't be required
+					user: req.user.sub,
+				});
+
+				await req.em.flush();
+
+				console.log("Created new character:", newChar);
+				return reply.send(newChar);
+			} catch (err) {
+				console.log("Failed to create new user", err.message);
+				return reply.status(500).send({ message: err.message });
+			}
+		}
+	);
+
 	// C = Create Character
 	app.post<{ Body: { id: number; fName: string; lName: string; desc: string; hidden: boolean } }>(
 		"/character",
@@ -33,6 +70,13 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 			console.log(req.user.sub);
 
 			try {
+				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
+				console.log(currentChar);
+				if (currentChar) {
+					//need to finish setting up multiple characters
+					return reply.status(500).send({ message: "User already has a character." });
+				}
+
 				const newChar = await req.em.create(Char, {
 					id,
 					fName: fLower,
@@ -40,6 +84,7 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 					desc,
 					hidden,
 					featured: false, // this probably shouldn't be required
+					user: req.user.sub,
 				});
 
 				await req.em.flush();
