@@ -15,7 +15,7 @@ import {
 	LoginButton,
 	LogoutButton,
 	SampleProfile,
-} from "@/Components.tsx";
+} from "@/components/Components.tsx";
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
 import reactLogo from "@images/react.svg";
