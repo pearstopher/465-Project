@@ -24,6 +24,7 @@ import viteLogo from "/vite.svg";
 import "@css/header.css";
 import "@css/content.css";
 import "@css/footer.css";
+import "@css/editor.css";
 import logo from "@images/logo.png";
 import { useCookies } from "react-cookie";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -31,6 +32,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // This is our first React "Component"
 export function App() {
 	const { user, isAuthenticated } = useAuth0();
+
 	return (
 		<BrowserRouter>
 			<div className="App">
