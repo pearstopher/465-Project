@@ -232,7 +232,8 @@ export const MyProfile = () => {
 };
 
 export const CreateOrUpdateChar = () => {
-	const [hasChar, setHasChar] = useState(true);
+	const [hasChar, setHasChar] = useState(0);
+
 	const [hasCharMessage, setHasCharMessage] = useState("Checking if you have a character...");
 
 	useEffect(() => {
@@ -249,7 +250,8 @@ export const CreateOrUpdateChar = () => {
 				} else {
 					setHasCharMessage(`You do not have a character.`);
 				}
-				return charRes.data.exists; //the call returns exists: true or exists: false
+				//return the character ID if it exists or 0 if it does not
+				return charRes.data.exists ? charRes.data.id : 0;
 			} catch (e) {
 				setHasCharMessage(`Error determining if character exists. Error message: ${e.message}.`);
 				console.log(e);
@@ -262,10 +264,10 @@ export const CreateOrUpdateChar = () => {
 	return (
 		<>
 			<div>{hasCharMessage}</div>
-			{hasChar ? (
+			{hasChar !== 0 ? (
 				<>
 					<h4>Update Character</h4>
-					<UpdateChar id={45151669} />
+					<UpdateChar id={hasChar} />
 				</>
 			) : (
 				<>

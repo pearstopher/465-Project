@@ -48,6 +48,9 @@ export function App() {
 								{" "}
 								<Link to="/">Home</Link>
 							</li>
+							<li>
+								<Link to="/search">Search</Link>
+							</li>
 							{isAuthenticated ? (
 								<>
 									<li>
@@ -62,12 +65,9 @@ export function App() {
 									<LoginButton />
 								</li>
 							)}
-							<li>
-								<Link to="/character/42934531">Example Profile</Link>
-							</li>
-							<li>
-								<Link to="/search">Search</Link>
-							</li>
+							{/*<li>*/}
+							{/*	<Link to="/character/42934531">Example Profile</Link>*/}
+							{/*</li>*/}
 						</menu>
 					</nav>
 				</header>
