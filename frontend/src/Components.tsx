@@ -23,16 +23,20 @@ function getCookie(key) {
 export const LoginButton = () => {
 	const { loginWithRedirect } = useAuth0();
 
-	return <button onClick={() => loginWithRedirect()}>Log In</button>;
+	return (
+		<a href={"#"} onClick={() => loginWithRedirect()}>
+			Log In
+		</a>
+	);
 };
 
 export const LogoutButton = () => {
 	const { logout } = useAuth0();
 
 	return (
-		<button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+		<a href={"#"} onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
 			Log Out
-		</button>
+		</a>
 	);
 };
 
