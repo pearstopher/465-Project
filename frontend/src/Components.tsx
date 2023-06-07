@@ -543,7 +543,7 @@ export const UpdateChar = (props) => {
 				// fName: fName,
 				// lName: lName, //can't update name right now (your name shouldn't change!?)
 				desc: updateCharDesc,
-				hidden: !updateCharHidden,
+				hidden: updateCharHidden,
 			};
 			try {
 				const usersRes = await axios.put(`http://localhost:8080/character`, postVars);
@@ -634,9 +634,9 @@ export const UpdateChar = (props) => {
 				<input
 					type={"checkbox"}
 					id={"updateCharHidden"}
-					defaultChecked={!updateCharHidden}
+					checked={!updateCharHidden}
 					onChange={(e) => {
-						setUpdateCharHidden(e.target.checked);
+						setUpdateCharHidden(!e.target.checked);
 					}}
 				/>
 				<label htmlFor={"addCharHidden"}>Allow users to search for my character by name?</label>
