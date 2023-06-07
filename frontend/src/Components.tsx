@@ -133,6 +133,8 @@ export const Home = () => {
 			<SearchButton />
 
 			<FeaturedChars />
+
+			<TextEditor />
 		</section>
 	);
 };

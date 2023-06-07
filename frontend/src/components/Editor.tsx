@@ -11,8 +11,11 @@ export class TextEditor extends React.Component {
 	}
 
 	render() {
-		return <Editor editorState={this.state.editorState} onChange={this.onChange} />;
+		return (
+			<>
+				<h3>Editor</h3>
+				<Editor editorState={this.state.editorState} onChange={this.onChange} />
+			</>
+		);
 	}
 }
-
-ReactDOM.render(<TextEditor />, document.getElementById("container"));
