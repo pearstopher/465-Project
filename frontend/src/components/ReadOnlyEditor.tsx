@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "draft-js/dist/Draft.css";
 import { Editor, EditorState, RichUtils } from "draft-js";
 
-export class TextEditor extends React.Component {
+export class ReadOnlyEditor extends React.Component {
 	constructor(props) {
 		super(props);
 		//this.state = { editorState: EditorState.createEmpty() };

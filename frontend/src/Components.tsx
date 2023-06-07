@@ -6,6 +6,7 @@ import { Char, CharacterResponse } from "@/PCPTypes.ts";
 import avatar from "@images/avatar.jpg";
 import portrait from "@images/portrait.jpg";
 import { useCookies } from "react-cookie";
+import { Editor, EditorState, RichUtils } from "draft-js";
 
 // login and logout buttons
 import React from "react";
@@ -13,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 // going to start moving things to the /components directory
 import { TextEditor } from "@/components/Editor.tsx";
+import { ReadOnlyEditor } from "@/components/ReadOnlyEditor.tsx";
 
 //borrowed this function to get the cookie I set
 // until I figure out where to put the useCookies to make it available everywhere
@@ -133,8 +135,6 @@ export const Home = () => {
 			<SearchButton />
 
 			<FeaturedChars />
-
-			<TextEditor />
 		</section>
 	);
 };
@@ -481,13 +481,6 @@ export const AddChar = () => {
 					onChange={(e) => {
 						addFirst(e);
 					}}
-					//it would suck if you couldn't press Enter in a textarea tho
-					/*onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							setFormSubmit(true);
-							formSubmitFn();
-						}
-					}}*/
 				/>
 				<label htmlFor={"addCharDesc"} className={"hidden"}>
 					{descVal}
@@ -537,6 +530,9 @@ export const UpdateChar = (props) => {
 	const [formSubmit, setFormSubmit] = useState(false);
 	const [updateCharMessage, setUpdateCharMessage] = useState(
 		"Success / error messages will appear here."
+	);
+	const [updateCharDescEditorState, setUpdateCharDescEditorState] = useState(
+		EditorState.createEmpty()
 	);
 
 	const formSubmitFn = () => {
@@ -635,6 +631,17 @@ export const UpdateChar = (props) => {
 				<label htmlFor={"addCharDesc"} className={"hidden"}>
 					{updateCharInfo.desc}
 				</label>
+
+				<TextEditor
+					editorState={updateCharDescEditorState}
+					onChange={setUpdateCharDescEditorState}
+				/>
+
+				<ReadOnlyEditor
+					editorState={updateCharDescEditorState}
+					onChange={setUpdateCharDescEditorState}
+				/>
+				{JSON.stringify(updateCharDescEditorState.getCurrentContent())}
 
 				<input
 					type={"checkbox"}
