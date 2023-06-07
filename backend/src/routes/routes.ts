@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Char } from "../db/entities/Char.js";
-import { CharacterRoutes } from "./character_crud.js";
+import { CharacterCRUD } from "./character_crud.js";
+import { CharacterSearch } from "./character_search.js";
 
 /** This function creates all backend routes for the site
  *
@@ -19,7 +20,8 @@ async function PCPRoutes(app: FastifyInstance, _options = {}) {
 		return "Welcome to Pears' Character Profiles backend.";
 	});
 
-	CharacterRoutes(app);
+	CharacterCRUD(app);
+	CharacterSearch(app);
 
 	// Has Character
 	// Does authenticated user have a character or not?
