@@ -26,9 +26,11 @@ import "@css/content.css";
 import "@css/footer.css";
 import logo from "@images/logo.png";
 import { useCookies } from "react-cookie";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // This is our first React "Component"
 export function App() {
+	const { user, isAuthenticated } = useAuth0();
 	return (
 		<BrowserRouter>
 			<div className="App">
@@ -46,24 +48,20 @@ export function App() {
 								{" "}
 								<Link to="/">Home</Link>
 							</li>
-							<li>
-								<Link to="/myProfile">My Profile</Link>
-							</li>
-							<li>
-								{/*<Link*/}
-								{/*	to={*/}
-								{/*		"https://dev-lnl6xq2bi1qytw01.us.auth0.com/authorize?response_type=token&client_id=" +*/}
-								{/*		"3b6XUUqEZ5izxZXoRSr4AWdWDR8X3XDB" +*/}
-								{/*		"&redirect_uri=http://localhost:5173/callback"*/}
-								{/*	}*/}
-								{/*>*/}
-								{/*	Login*/}
-								{/*</Link>*/}
-								<LoginButton />
-							</li>
-							<li>
-								<LogoutButton />
-							</li>
+							{isAuthenticated ? (
+								<>
+									<li>
+										<Link to="/myProfile">My Profile</Link>
+									</li>
+									<li>
+										<LogoutButton />
+									</li>
+								</>
+							) : (
+								<li>
+									<LoginButton />
+								</li>
+							)}
 							<li>
 								<Link to="/character/42934531">Example Profile</Link>
 							</li>
