@@ -26,4 +26,28 @@ export function CharacterSearch(app: FastifyInstance) {
 			}
 		}
 	);
+
+	// Has Character
+	// Does authenticated user have a character or not?
+	app.get(
+		"/hasCharacter",
+		{
+			onRequest: [app.authenticate],
+		},
+		async (req, reply) => {
+			try {
+				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
+				console.log(currentChar);
+				if (currentChar) {
+					//need to finish setting up multiple characters
+					return reply.send({ exists: true, id: currentChar.id });
+				} else {
+					return reply.send({ exists: false, id: 0 });
+				}
+			} catch (err) {
+				console.log("Error checking for character.", err.message);
+				return reply.status(500).send({ message: err.message });
+			}
+		}
+	);
 }
