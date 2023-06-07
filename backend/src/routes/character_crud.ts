@@ -13,7 +13,6 @@ export function CharacterCRUD(app: FastifyInstance) {
 
 			const fLower = fName.toLowerCase();
 			const lLower: string = lName.toLowerCase();
-			console.log(req.user.sub);
 
 			try {
 				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
