@@ -11,6 +11,9 @@ import { useCookies } from "react-cookie";
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
+// going to start moving things to the /components directory
+import { TextEditor } from "@/components/Editor.tsx";
+
 //borrowed this function to get the cookie I set
 // until I figure out where to put the useCookies to make it available everywhere
 // https://stackoverflow.com/questions/51109559/get-cookie-with-react

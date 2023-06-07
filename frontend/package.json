@@ -17,6 +17,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
     "axios": "^1.4.0",
+    "draft-js": "^0.11.7",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
