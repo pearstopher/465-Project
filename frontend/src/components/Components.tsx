@@ -20,26 +20,6 @@ function getCookie(key) {
 	return b ? b.pop() : "";
 }
 
-export const Match = () => {
-	return <div>"MATCH PAGE"</div>;
-};
-
-export const Home = () => {
-	return (
-		<section>
-			<h3>Welcome</h3>
-			<p>
-				Welcome to Pears' Character Profiles. You can use this site to browse the characters I have
-				created so far, and to create your own!
-			</p>
-
-			<SearchButton />
-
-			<FeaturedChars />
-		</section>
-	);
-};
-
 export const Callback = () => {
 	//const { hash } = useLocation();
 	//const token = hash.substring(hash.indexOf("#access_token=") + 14, hash.indexOf("&"));
