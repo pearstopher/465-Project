@@ -2,9 +2,6 @@ import {
 	Button,
 	SearchButton,
 	Home,
-	UsersList,
-	Match,
-	RandomProfile,
 	NameSearch,
 	CharSearch,
 	Character,
@@ -12,15 +9,12 @@ import {
 	Subtitle,
 	MyProfile,
 	Callback,
-	LoginButton,
-	LogoutButton,
 	SampleProfile,
 } from "@/components/Components.tsx";
+import { LoginButton, LogoutButton } from "@/components/LogInOut.tsx";
+
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
-import reactLogo from "@images/react.svg";
-import viteLogo from "/vite.svg";
-//import "@css/App.css";
 import "@css/header.css";
 import "@css/content.css";
 import "@css/footer.css";
