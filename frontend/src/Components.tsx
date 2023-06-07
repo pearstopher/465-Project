@@ -6,7 +6,7 @@ import { Char, CharacterResponse } from "@/PCPTypes.ts";
 import avatar from "@images/avatar.jpg";
 import portrait from "@images/portrait.jpg";
 import { useCookies } from "react-cookie";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { Editor, EditorState, ContentState, RichUtils } from "draft-js";
 
 // login and logout buttons
 import React from "react";
@@ -524,7 +524,7 @@ export const UpdateChar = (props) => {
 		featured: false,
 	};
 	const [updateCharInfo, setUpdateCharInfo] = useState([]);
-	const [updateCharDesc, setUpdateCharDesc] = useState("");
+	const [updateCharDesc, setUpdateCharDesc] = useState(ContentState.createFromText("empty"));
 	const [updateCharHidden, setUpdateCharHidden] = useState(true); //negated later
 	// won't update as tempchar even though ti does in Character function. I can't explain it so I just take the errors for now
 	const [formSubmit, setFormSubmit] = useState(false);
@@ -573,7 +573,7 @@ export const UpdateChar = (props) => {
 			try {
 				const usersRes = await axios.get<Char>(`http://localhost:8080/character/${props.id}`);
 				console.log(usersRes.data);
-				setUpdateCharDesc(usersRes.data.desc);
+				setUpdateCharDesc(JSON.parse(usersRes.data.desc));
 				setUpdateCharHidden(usersRes.data.hidden);
 				setUpdateCharMessage(`Character Information Received Successfully`);
 				return usersRes.data;
@@ -623,9 +623,10 @@ export const UpdateChar = (props) => {
 
 				<textarea
 					id={"updateCharDesc"}
-					defaultValue={updateCharDesc}
+					value={JSON.stringify(updateCharDescEditorState.getCurrentContent())}
 					onChange={(e) => {
-						setUpdateCharDesc(e.target.value);
+						setUpdateCharDesc(JSON.parse(e.target.value));
+						console.log("change");
 					}}
 				/>
 				<label htmlFor={"addCharDesc"} className={"hidden"}>
@@ -638,7 +639,7 @@ export const UpdateChar = (props) => {
 				/>
 
 				<ReadOnlyEditor
-					editorState={updateCharDescEditorState}
+					editorState={EditorState.createWithContent(updateCharDesc)}
 					onChange={setUpdateCharDescEditorState}
 				/>
 				{JSON.stringify(updateCharDescEditorState.getCurrentContent())}

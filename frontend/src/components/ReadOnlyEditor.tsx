@@ -9,7 +9,9 @@ export class ReadOnlyEditor extends React.Component {
 		//this.state = { editorState: EditorState.createEmpty() };
 		this.state = { editorState: props.editorState };
 
-		this.focus = () => this.refs.editor.focus();
+		this.focus = () => {
+			this.refs.editor.focus();
+		};
 		this.onChange = (editorState) => {
 			this.setState({ editorState });
 			props.onChange(editorState);
