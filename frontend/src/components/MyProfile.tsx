@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
-import { CreateOrUpdateChar } from "@/components/Components.tsx";
+import { CreateOrUpdateChar } from "@/components/CreateOrUpdateChar.tsx";
 
 export const MyProfile = () => {
 	return (

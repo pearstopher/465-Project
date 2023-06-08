@@ -1,6 +1,6 @@
 import { NameSearch, Character, Title, Subtitle } from "@/components/Components.tsx";
 import { LoginButton, LogoutButton } from "@/components/LogInOut.tsx";
-import { MyProfile } from "@/components/SampleProfile.tsx";
+import { MyProfile } from "@/components/MyProfile.tsx";
 import { Home } from "@/components/Home.tsx";
 import { Callback } from "@/components/AuthCallback.tsx";
 
