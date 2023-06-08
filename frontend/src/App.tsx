@@ -1,9 +1,10 @@
-import { NameSearch, Title, Subtitle } from "@/components/Components.tsx";
+import { Title, Subtitle } from "@/components/Components.tsx";
 import { LoginButton, LogoutButton } from "@/components/LogInOut.tsx";
 import { MyProfile } from "@/components/MyProfile.tsx";
 import { Home } from "@/components/Home.tsx";
 import { Callback } from "@/components/AuthCallback.tsx";
 import { Character } from "@/components/DisplayCharacter.tsx";
+import { NameSearch } from "@/components/Search.tsx";
 
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";

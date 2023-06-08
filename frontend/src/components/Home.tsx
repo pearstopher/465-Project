@@ -1,5 +1,6 @@
 import React from "react";
-import { FeaturedChars, SearchButton } from "@/components/Components.tsx";
+import { FeaturedChars } from "@/components/Components.tsx";
+import { SearchButton } from "@/components/Search.tsx";
 
 export const Home = () => {
 	return (
