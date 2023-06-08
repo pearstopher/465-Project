@@ -1,5 +1,23 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
+import { CreateOrUpdateChar } from "@/components/Components.tsx";
+
+export const MyProfile = () => {
+	return (
+		<>
+			<section>
+				<h3>My Info</h3>
+				<SampleProfile />
+			</section>
+			<section>
+				<h3>My Character Profile</h3>
+
+				<h3>Do I have a character?</h3>
+				<CreateOrUpdateChar />
+			</section>
+		</>
+	);
+};
 
 // export const SampleProfile = () => {
 // 	const { user, isAuthenticated, isLoading } = useAuth0();

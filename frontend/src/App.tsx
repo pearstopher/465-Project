@@ -1,17 +1,8 @@
-import {
-	Button,
-	SearchButton,
-	Home,
-	NameSearch,
-	CharSearch,
-	Character,
-	Title,
-	Subtitle,
-	MyProfile,
-	Callback,
-	SampleProfile,
-} from "@/components/Components.tsx";
+import { NameSearch, Character, Title, Subtitle } from "@/components/Components.tsx";
 import { LoginButton, LogoutButton } from "@/components/LogInOut.tsx";
+import { MyProfile } from "@/components/SampleProfile.tsx";
+import { Home } from "@/components/Home.tsx";
+import { Callback } from "@/components/AuthCallback.tsx";
 
 import { useState } from "react";
 import { Link, Route, Routes, Router, BrowserRouter, useParams } from "react-router-dom";
