@@ -36,6 +36,16 @@ services:
       postgres:
         condition: service_healthy
 
+  frontend:
+    container_name: frontend
+    build: ./frontend/
+    restart: always
+    ports:
+      - "88:80" # We need to map here for convenience, so we don't conflict with a potential possible local server
+    environment:
+      - API_HOST=backend
+      - PORT=8080
+
 volumes:
   db:
     driver: local
