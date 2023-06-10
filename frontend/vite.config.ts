@@ -24,5 +24,18 @@ export default defineConfig(({ command, mode }) => {
 		},
 		// vite config
 		define,
+		server: {
+			watch: {
+				usePolling: true,
+			},
+			host: true, // needed for the Docker Container port mapping to work
+			strictPort: true,
+			port: 5173,
+		},
+		build: {
+			target: "esnext",
+			emptyOutDir: true,
+			outDir: "build",
+		},
 	};
 });
