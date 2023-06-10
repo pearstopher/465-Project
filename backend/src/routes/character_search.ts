@@ -36,6 +36,7 @@ export function CharacterSearch(app: FastifyInstance) {
 		},
 		async (req, reply) => {
 			try {
+				//@ts-ignore
 				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
 				console.log(currentChar);
 				if (currentChar) {

@@ -15,6 +15,7 @@ export function CharacterCRUD(app: FastifyInstance) {
 			const lLower: string = lName.toLowerCase();
 
 			try {
+				//@ts-ignore
 				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
 				console.log(currentChar);
 				if (currentChar) {
@@ -29,6 +30,7 @@ export function CharacterCRUD(app: FastifyInstance) {
 					desc,
 					hidden,
 					featured: false, // this probably shouldn't be required
+					//@ts-ignore
 					user: req.user.sub,
 				});
 
