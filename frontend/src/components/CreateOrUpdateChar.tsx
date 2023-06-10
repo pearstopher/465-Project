@@ -366,7 +366,10 @@ export const UpdateChar = (props) => {
 				<input
 					type={"text"}
 					id={"updateCharFirstName"}
-					defaultValue={updateCharInfo.fName}
+					defaultValue={
+						//@ts-ignore
+						updateCharInfo.fName
+					}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							setFormSubmit(true);
@@ -375,12 +378,16 @@ export const UpdateChar = (props) => {
 					}}
 				/>
 				<label htmlFor={"updateCharFirstName"} className={"hidden"}>
-					{updateCharInfo.fName}
+					{
+						//@ts-ignore
+						updateCharInfo.fName
+					}
 				</label>
 
 				<input
 					type={"text"}
 					id={"updateCharLastName"}
+					//@ts-ignore
 					defaultValue={updateCharInfo.lName}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
@@ -390,7 +397,10 @@ export const UpdateChar = (props) => {
 					}}
 				/>
 				<label htmlFor={"updateCharLastName"} className={"hidden"}>
-					{updateCharInfo.lName}
+					{
+						//@ts-ignore
+						updateCharInfo.lName
+					}
 				</label>
 
 				<textarea
@@ -401,7 +411,10 @@ export const UpdateChar = (props) => {
 					}}
 				/>
 				<label htmlFor={"addCharDesc"} className={"hidden"}>
-					{updateCharInfo.desc}
+					{
+						//@ts-ignore
+						updateCharInfo.desc
+					}
 				</label>
 
 				<input
