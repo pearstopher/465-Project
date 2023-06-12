@@ -106,7 +106,7 @@ h1 {
     padding: 20px;
     color: white;
     text-decoration: none;
-    border: 1px solid darkgreen;
+    /* border: 1px solid darkgreen; */
     min-width: 200px;
     text-align: center;
 }
