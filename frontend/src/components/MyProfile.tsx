@@ -79,7 +79,7 @@ export const SampleProfile = () => {
 		isAuthenticated && (
 			<div>
 				<img src={user.picture} alt={user.name} />
-				<h4f>{user.name}</h4f>
+				<h4>{user.name}</h4>
 				<p>{user.email}</p>
 				{/*<h3>User Metadata</h3>*/}
 				{/*{userMetadata ? (*/}
