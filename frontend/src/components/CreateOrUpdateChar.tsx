@@ -48,7 +48,6 @@ export const CreateOrUpdateChar = () => {
 					<AddChar />
 				</>
 			)}
-			<div>{hasCharMessage}</div>
 		</>
 	);
 };
