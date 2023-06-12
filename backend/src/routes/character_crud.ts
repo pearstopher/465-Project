@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { Char } from "../db/entities/Char.js";
+import axios from "axios";
 
 export function CharacterCRUD(app: FastifyInstance) {
 	// C = Create Character
@@ -23,6 +24,13 @@ export function CharacterCRUD(app: FastifyInstance) {
 					return reply.status(500).send({ message: "User already has a character." });
 				}
 
+				// get the profile from lodestone
+				const getCharInfoFromLodestone = async () => {
+					const usersRes = await axios.get(`https://xivapi.com/character/${id}`);
+					return usersRes.data;
+				};
+				const charInfo = await getCharInfoFromLodestone();
+
 				const newChar = await req.em.create(Char, {
 					id,
 					fName: fLower,
@@ -32,6 +40,7 @@ export function CharacterCRUD(app: FastifyInstance) {
 					featured: false, // this probably shouldn't be required
 					//@ts-ignore
 					user: req.user.sub,
+					avatar: charInfo.Character.Avatar,
 				});
 
 				await req.em.flush();

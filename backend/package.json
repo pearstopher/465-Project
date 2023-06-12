@@ -40,6 +40,7 @@
     "@mikro-orm/postgresql": "5.7.2",
     "@mikro-orm/reflection": "5.7.2",
     "@mikro-orm/seeder": "5.7.2",
+    "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "fastify-auth0-verify": "^1.1.2",
