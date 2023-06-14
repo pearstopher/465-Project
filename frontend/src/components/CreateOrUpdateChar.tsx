@@ -367,13 +367,13 @@ export const UpdateChar = (props) => {
 	}, []);
 
 	return (
-		<div id={"updateCharWrap"}>
+		<div id={"updateCharWrap" + props.id}>
 			<h5>Enter your character information below:</h5>
 
-			<div id={"updateCharForm"}>
+			<div id={"updateCharForm" + props.id}>
 				<input
 					type={"text"}
-					id={"updateCharFirstName"}
+					id={"updateCharFirstName" + props.id}
 					defaultValue={
 						//@ts-ignore
 						updateCharInfo.fName
@@ -394,7 +394,7 @@ export const UpdateChar = (props) => {
 
 				<input
 					type={"text"}
-					id={"updateCharLastName"}
+					id={"updateCharLastName" + props.id}
 					//@ts-ignore
 					defaultValue={updateCharInfo.lName}
 					onKeyDown={(e) => {
@@ -404,7 +404,7 @@ export const UpdateChar = (props) => {
 						}
 					}}
 				/>
-				<label htmlFor={"updateCharLastName"} className={"hidden"}>
+				<label htmlFor={"updateCharLastName" + props.id} className={"hidden"}>
 					{
 						//@ts-ignore
 						updateCharInfo.lName
@@ -412,7 +412,7 @@ export const UpdateChar = (props) => {
 				</label>
 
 				<textarea
-					id={"updateCharDesc"}
+					id={"updateCharDesc" + props.id}
 					defaultValue={updateCharDesc}
 					onChange={(e) => {
 						setUpdateCharDesc(e.target.value);
@@ -427,7 +427,7 @@ export const UpdateChar = (props) => {
 
 				<input
 					type={"checkbox"}
-					id={"updateCharHidden"}
+					id={"updateCharHidden" + props.id}
 					checked={!updateCharHidden}
 					onChange={(e) => {
 						setUpdateCharHidden(!e.target.checked);
@@ -437,7 +437,7 @@ export const UpdateChar = (props) => {
 
 				<button
 					className={"submit"}
-					id={"updateCharSubmit"}
+					id={"updateCharSubmit" + props.id}
 					onClick={() => {
 						setFormSubmit(true);
 						formSubmitFn();
@@ -445,7 +445,7 @@ export const UpdateChar = (props) => {
 				>
 					Update Character
 				</button>
-				<p id={"updateCharInfo"}>{updateCharMessage}</p>
+				<p id={"updateCharInfo" + props.id}>{updateCharMessage}</p>
 			</div>
 		</div>
 	);
