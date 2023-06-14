@@ -17,11 +17,11 @@ export function CharacterCRUD(app: FastifyInstance) {
 
 			try {
 				//@ts-ignore
-				const currentChar = await req.em.findOne(Char, { user: req.user.sub });
+				const currentChar = await req.em.findOne(Char, { id: id });
 				console.log(currentChar);
 				if (currentChar) {
 					//need to finish setting up multiple characters
-					return reply.status(500).send({ message: "User already has a character." });
+					return reply.status(500).send({ message: "This character already exists." });
 				}
 
 				// get the profile from lodestone
