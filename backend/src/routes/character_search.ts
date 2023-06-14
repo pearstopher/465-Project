@@ -74,7 +74,7 @@ export function CharacterSearch(app: FastifyInstance) {
 					//need to finish setting up multiple characters
 					return reply.send({ exists: true, ids: ids });
 				} else {
-					return reply.send({ exists: false, id: 0 });
+					return reply.send({ exists: false, ids: 0 });
 				}
 			} catch (err) {
 				console.log("Error checking for character.", err.message);
