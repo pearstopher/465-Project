@@ -51,4 +51,35 @@ export function CharacterSearch(app: FastifyInstance) {
 			}
 		}
 	);
+
+	// Has Characters
+	// Updated version of HasCharacter which returns all the user's characters instead of just one
+	app.get(
+		"/hasCharacters",
+		{
+			onRequest: [app.authenticate],
+		},
+		async (req, reply) => {
+			try {
+				//@ts-ignore
+				const currentChars = await req.em.find(Char, { user: req.user.sub });
+				console.log(currentChars);
+				//make a list of all the character ids
+				if (currentChars) {
+					const ids = [];
+					currentChars.forEach((currentChar) => {
+						ids.push(currentChar.id);
+					});
+
+					//need to finish setting up multiple characters
+					return reply.send({ exists: true, ids: ids });
+				} else {
+					return reply.send({ exists: false, id: 0 });
+				}
+			} catch (err) {
+				console.log("Error checking for character.", err.message);
+				return reply.status(500).send({ message: err.message });
+			}
+		}
+	);
 }
