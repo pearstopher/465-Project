@@ -31,7 +31,8 @@
     "schema:drop": "Drops all database tables + associated data",
     "seed:create": "Creates a new seeder file in db/seeders",
     "seed:run": "Runs all seeders to add default info to our database",
-    "db:reset": "Completely updates our database to match our source code"
+    "db:reset": "Completely updates our database to match our source code",
+    "startProd": "I know we should NOT call something that calls schema:update in production. Just added temporarily to make it seed the prod DB for you."
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
