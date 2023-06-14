@@ -43,8 +43,15 @@ export const CreateOrUpdateChar = () => {
 			<div>{hasCharMessage}</div>
 			{hasChar.length !== 0 ? (
 				<>
-					<h4>Update Character</h4>
+					<div className={"createCharWrap"}>
+						<h4>Create Character</h4>
+						<div className={"createCharInnerWrap"}>
+							<p>Character creation is currently unlimited!</p>
+							<a href={`myProfile/newChar`}>Create New Character</a>
+						</div>
+					</div>
 
+					<h4>Update Characters</h4>
 					{hasChar.map((char: { id: number }) => (
 						<UpdateChar key={char.id} id={char.id} />
 					))}

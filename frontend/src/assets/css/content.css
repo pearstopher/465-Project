@@ -101,3 +101,13 @@ featured characters (on the home page rn)
 .updateChar textarea {
 	width: 80%;
 }
+.createCharWrap {
+	padding: 20px 0;
+}
+.createCharInnerWrap {
+	background: lightgreen;
+	border-radius: 20px;
+	padding: 5px 20px 20px 20px;
+	width: 100%;
+	margin-bottom:30px;
+}
