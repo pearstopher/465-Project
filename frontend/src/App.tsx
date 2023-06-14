@@ -1,6 +1,6 @@
 import { Title, Subtitle } from "@/components/Components.tsx";
 import { LoginButton, LogoutButton } from "@/components/LogInOut.tsx";
-import { MyProfile } from "@/components/MyProfile.tsx";
+import { MyProfile, MyProfileNewChar } from "@/components/MyProfile.tsx";
 import { Home } from "@/components/Home.tsx";
 import { Callback } from "@/components/AuthCallback.tsx";
 import { Character } from "@/components/DisplayCharacter.tsx";
@@ -66,6 +66,7 @@ export function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/character/:idParam" element={<Character />} />
 						<Route path="/myProfile" element={<MyProfile />} />
+						<Route path="/myProfile/newChar" element={<MyProfileNewChar />} />
 						<Route path="/search/:fullNameWithDash?" element={<NameSearch />} />
 						<Route path="/callback" element={<Callback />} />
 					</Routes>

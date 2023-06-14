@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
-import { CreateOrUpdateChar } from "@/components/CreateOrUpdateChar.tsx";
+import { CreateOrUpdateChar, AddChar } from "@/components/CreateOrUpdateChar.tsx";
 
 export const MyProfile = () => {
 	return (
@@ -14,6 +14,22 @@ export const MyProfile = () => {
 
 				<h3>Do I have a character?</h3>
 				<CreateOrUpdateChar />
+			</section>
+		</>
+	);
+};
+
+export const MyProfileNewChar = () => {
+	return (
+		<>
+			<section>
+				<h3>My Info</h3>
+				<SampleProfile />
+			</section>
+			<section>
+				<h3>Create New Character</h3>
+
+				<AddChar />
 			</section>
 		</>
 	);
