@@ -3,16 +3,18 @@ import axios from "axios";
 import { getCookie } from "@/components/AuthCallback.tsx";
 import { useNavigate } from "react-router-dom";
 import { Char } from "@/PCPTypes.ts";
+import avatar from "@images/avatar.jpg";
+import { Link } from "@/components/Components.tsx";
 
 export const CreateOrUpdateChar = () => {
-	const [hasChar, setHasChar] = useState(0);
+	const [hasChar, setHasChar] = useState([]);
 
 	const [hasCharMessage, setHasCharMessage] = useState("Checking if you have a character...");
 
 	useEffect(() => {
 		const getHasChar = async () => {
 			try {
-				const charRes = await axios.get(`http://localhost:8080/hasCharacter`, {
+				const charRes = await axios.get(`http://localhost:8080/hasCharacters`, {
 					headers: {
 						Authorization: `Bearer ${getCookie("access_token")}`,
 					},
@@ -23,8 +25,8 @@ export const CreateOrUpdateChar = () => {
 				} else {
 					setHasCharMessage(`You do not have a character.`);
 				}
-				//return the character ID if it exists or 0 if it does not
-				return charRes.data.exists ? charRes.data.id : 0;
+				//return the character IDS if it exists or empty array if it does not
+				return charRes.data.exists ? charRes.data.ids : [];
 			} catch (e) {
 				setHasCharMessage(`Error determining if character exists. Error message: ${e.message}.`);
 				console.log(e);
@@ -37,8 +39,11 @@ export const CreateOrUpdateChar = () => {
 	return (
 		<>
 			<div>{hasCharMessage}</div>
-			{hasChar !== 0 ? (
+			{hasChar.length !== 0 ? (
 				<>
+					{hasChar.map((char: { id: number }) => (
+						<UpdateChar id={char.id} />
+					))}
 					<h4>Update Character</h4>
 					<UpdateChar id={hasChar} />
 				</>
@@ -349,7 +354,9 @@ export const UpdateChar = (props) => {
 				setUpdateCharMessage(`Character Information Received Successfully`);
 				return usersRes.data;
 			} catch (e) {
-				setUpdateCharMessage(`Error Creating Character. Error message: ${e.message}.`);
+				setUpdateCharMessage(
+					`Error Retrieving Character Information. Error message: ${e.message}.`
+				);
 				console.log(e);
 				return e;
 			}
