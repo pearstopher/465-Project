@@ -68,7 +68,7 @@ export function CharacterSearch(app: FastifyInstance) {
 				if (currentChars) {
 					const ids = [];
 					currentChars.forEach((currentChar) => {
-						ids.push(currentChar.id);
+						ids.push({ id: currentChar.id });
 					});
 
 					//need to finish setting up multiple characters

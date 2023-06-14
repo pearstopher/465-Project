@@ -19,7 +19,7 @@ export const CreateOrUpdateChar = () => {
 						Authorization: `Bearer ${getCookie("access_token")}`,
 					},
 				});
-				console.log(charRes.data);
+				// console.log(charRes.data);
 				if (charRes.data.exists) {
 					setHasCharMessage(`You have a character.`);
 				} else {
@@ -43,8 +43,8 @@ export const CreateOrUpdateChar = () => {
 				<>
 					<h4>Update Character</h4>
 
-					{hasChar.map((id) => (
-						<UpdateChar id={id} />
+					{hasChar.map((char: { id: number }) => (
+						<UpdateChar key={char.id} id={char.id} />
 					))}
 				</>
 			) : (
@@ -348,7 +348,7 @@ export const UpdateChar = (props) => {
 		const getUpdateCharInfo = async () => {
 			try {
 				const usersRes = await axios.get<Char>(`http://localhost:8080/character/${props.id}`);
-				console.log(usersRes.data);
+				//console.log(usersRes.data);
 				setUpdateCharDesc(usersRes.data.desc);
 				setUpdateCharHidden(usersRes.data.hidden);
 				setUpdateCharMessage(`Character Information Received Successfully`);
