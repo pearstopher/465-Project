@@ -41,11 +41,11 @@ export const CreateOrUpdateChar = () => {
 			<div>{hasCharMessage}</div>
 			{hasChar.length !== 0 ? (
 				<>
-					{hasChar.map((char: { id: number }) => (
-						<UpdateChar id={char.id} />
-					))}
 					<h4>Update Character</h4>
-					<UpdateChar id={hasChar} />
+
+					{hasChar.map((id) => (
+						<UpdateChar id={id} />
+					))}
 				</>
 			) : (
 				<>
