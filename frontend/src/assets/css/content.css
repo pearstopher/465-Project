@@ -89,3 +89,15 @@ featured characters (on the home page rn)
 	padding-right: 30px;
 	grid-row: 3 / 4;
 }
+
+
+.updateChar {
+	background: lightgreen;
+	border-radius: 20px;
+	padding: 5px 20px;
+	width: 100%;
+	margin-bottom:30px;
+}
+.updateChar textarea {
+	width: 80%;
+}

@@ -367,9 +367,18 @@ export const UpdateChar = (props) => {
 	}, []);
 
 	return (
-		<div id={"updateCharWrap" + props.id}>
-			<h5>Enter your character information below:</h5>
-
+		<div id={"updateCharWrap" + props.id} className={"updateChar"}>
+			<h3>
+				{
+					//@ts-ignore
+					updateCharInfo.fName
+				}{" "}
+				{
+					//@ts-ignore
+					updateCharInfo.lName
+				}
+			</h3>
+			<h5>Update your character information below:</h5>
 			<div id={"updateCharForm" + props.id}>
 				<input
 					type={"text"}
