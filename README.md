@@ -10,7 +10,16 @@ Christopher Snow
 
 ### Running the Program
 
-1. Starting the production environment:
+1. Copying the program
+    ```bash
+    git clone git@github.com:pearstopher/465-Project.git
+    cp frontend/.env.ts.example frontend/.env.ts
+    cp backend/.env.example backend/.env
+    ```
+    Everything you need is in the .env.example files, no need to copy anything else.
+    <br /><br />
+
+2. Starting the production environment:
     ```bash
     docker compose up
     ```
@@ -23,7 +32,7 @@ Christopher Snow
     see a few example characters like you would in Dev.*
     <br /><br />
 
-2. Starting the development environment:
+3. Starting the development environment:
     ```bash
     #frontend
     cd frontend && pnpm i && pnpm dev
