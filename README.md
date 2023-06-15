@@ -55,6 +55,17 @@ Project Presentation.
 2. [Presentation `https://youtu.be/4Bd1iFxa6Dk`](https://youtu.be/4Bd1iFxa6Dk)
 
 
+### Cookies Note
+
+Most of my testing has occurred using Chrome and I haven't had any issues with Auth0
+there. However, after moving back to the virtual machine, I noticed that on Firefox
+I sometimes get logged out of my website as the authentication cookies disappear any
+time the session ends. This is because Auth0 uses third party cookies, and Firefox 
+appears to now quarantine these cookies by default. If you are testing in Firefox 
+and run into any issues staying logged in, you can go to Settings -> Cookies and 
+enable third party cookies. 
+
+
 
 
 
