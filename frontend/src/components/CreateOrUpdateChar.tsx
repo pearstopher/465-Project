@@ -22,7 +22,7 @@ export const CreateOrUpdateChar = () => {
 				// console.log(charRes.data);
 				if (charRes.data.exists) {
 					const count = charRes.data.ids.length;
-					const s = count > 1 ? "s" : "";
+					const s = count !== 1 ? "s" : "";
 					setHasCharMessage(`You have ${count} character${s}.`);
 				} else {
 					setHasCharMessage(`You do not have a character.`);
