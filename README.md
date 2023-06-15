@@ -55,24 +55,42 @@ Or you can search for any character using the interface provided at
 https://na.finalfantasyxiv.com/lodestone/character/ and grab the ID
 from the character URL yourself.
 
-### Additional Information
 
-Additional information about my program can be found in both my journal and my 
-Project Presentation.
+### Authentication Notes *(Important!)*
 
-1. [Journal `Final_Project_Journal_Snow.pdf`](Final_Project_Journal_Snow.pdf) 
-2. [Presentation `https://youtu.be/4Bd1iFxa6Dk`](https://youtu.be/4Bd1iFxa6Dk)
-
-
-### Cookies Note
-
+#### Cookies
 Most of my testing has occurred using Chrome and I haven't had any issues with Auth0
 there. However, after moving back to the virtual machine, I noticed that on Firefox
-I sometimes get logged out of my website as the authentication cookies disappear any
+even when I get logged in successfully, sometimes get logged out of my website when
+I refresh the page. What is happening is that the authentication cookies disappear any
 time the session ends. This is because Auth0 uses third party cookies, and Firefox 
-appears to now quarantine these cookies by default. If you are testing in Firefox 
+appears to disallow third-party cookies by default. If you are testing in Firefox 
 and run into any issues staying logged in, you can go to Settings -> Cookies and 
 enable third party cookies. 
+
+#### Popup
+
+After authenticating with Auth0 on the frontend, the way to get the user's Access
+Token is normally to call the function [getAccessTokenSilently()](https://auth0.github.io/auth0-react/interfaces/Auth0ContextInterface.html#getAccessTokenSilently)
+which returns the user's access token. However this function specifically does not
+work on localhost because that is not a trusted domain. If you try to use it on
+localhost anyways, you just get an error saying that you must use the alternative
+function [getAccessTokenWithPopup()](https://auth0.github.io/auth0-react/interfaces/Auth0ContextInterface.html#getAccessTokenWithPopup)
+instead. So that is the function I am using since my site is running on localhost!
+The annoying part about this function is that in order to get the token, the
+page has to open a popup. So you will likely also have to enable popups in your 
+browser as well or else the authentiation process will not be able to complete.
+Thankfully this wouldn't be an issue on a live site!
+
+
+### Additional Information
+
+Additional information about my program can be found in both my journal and my
+Project Presentation.
+
+1. [Journal `Final_Project_Journal_Snow.pdf`](Final_Project_Journal_Snow.pdf)
+2. [Presentation `https://youtu.be/4Bd1iFxa6Dk`](https://youtu.be/4Bd1iFxa6Dk)
+
 
 
 
